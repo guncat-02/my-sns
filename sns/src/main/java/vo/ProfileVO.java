@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.List;
-
 public class ProfileVO {
 	private String id; //아이디
 	private String nickName; //닉네임
@@ -77,4 +75,10 @@ public class ProfileVO {
 		}
 		return telNum;
 	}
+	@Override
+	public String toString() {
+		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", email="
+				+ email + ", bio=" + bio + ", privacy=" + privacy + "]";
+	}
+	
 }

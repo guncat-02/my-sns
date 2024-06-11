@@ -16,7 +16,7 @@
             <div id="profile">
                 <div id="proLeft">
                     <div id="proPhoto">
-                        <label for="file" id="fileSelect"><img src="./resources/img/프로필.png" id="profileImg"></label>
+                        <label for="file" id="fileSelect"><img src="./resources/img/프로필.png" id="profileImg" style="background-color: black;"></label>
                         <input type="file" name="myPhoto" id="file">
                     </div>
                     <span>* 메인 프로필을 설정하여 게시글을 등록할 수 있습니다.</span>

@@ -42,8 +42,8 @@ body {
     height: 100%;
 }
 
-#myImgCircle, #myEditCircle {
-    position: absolute;
+#myImgCircle {
+    position: relative;
     top: 50%;
     left: 50%;
     margin-left: -153px;
@@ -54,23 +54,11 @@ body {
     border-radius: 50%;
 }
 
-#myImgCircle img, #myEditCircle img{
+#myImgCircle img {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-}
-
-#myFile {
-    display: none;
-}
-
-#editFile {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    cursor: pointer;
 }
 
 #myInfo {
@@ -131,17 +119,6 @@ body {
     text-align: left;
     width: 80%;
     margin-left: 11%;
-}
-
-.bioItem {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    resize: none;
-    width: 100%;
-    background-color: transparent;
-    color: white;
-    border: none;
-    font-size: 16px;
 }
  
 #myProfileSetting {
@@ -205,35 +182,6 @@ a {
     height: 100%;
 }
 
-#editBtn, #cancleBtn {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    cursor: pointer;
-    width: 100px;
-    height: 25px;
-    border: 1px solid #00f7ff;
-    color: white;
-    background-color: transparent;
-    width: 300px;
-}
-
-.edit {
-    display: none;
-}
-
-.bioItem {
-    display: block;
-}
-
 #settingMenu span {
     cursor: pointer;
-}
-
-.bioItem:-webkit-autofill, .bioItem:-webkit-autofill:hover, .bioItem:-webkit-autofill:focus, .bioItem:-webkit-autofill:active{
-    -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0 1000px transparent inset;
-    box-shadow: 0 0 0 1000px transparent inset;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-    transition: background-color 5000s ease-in-out 0s;
 }

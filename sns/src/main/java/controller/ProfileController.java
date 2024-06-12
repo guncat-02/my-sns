@@ -58,9 +58,6 @@ public class ProfileController {
 	@GetMapping("/profileShow")
 	public String profileShow(Model model) throws Exception {
 		ProfileVO p = pServe.select("nuit0204");
-		if(p.getPhoto() == null) {
-			p.setPhoto("./resources/img/프로필.png");
-		}
 		model.addAttribute("profile", p);
 		model.addAttribute("following", fServe.followingSelect("nuit0204"));
 		model.addAttribute("follower", fServe.followerSelect("nuit0204"));
@@ -77,5 +74,16 @@ public class ProfileController {
 		}
 		pServe.update(pVO);
 		return "redirect:/profileShow";
+	}
+	
+	//프로필 수정 화면 띄우기
+	@GetMapping("/profileEdit")
+	public String profileEdit(Model model) throws Exception {
+		ProfileVO p = pServe.select("nuit0204");
+		if(p.getPhoto() == null) {
+			p.setPhoto("null");
+		}
+		model.addAttribute("profile", p);
+		return "profileEdit";
 	}
 }

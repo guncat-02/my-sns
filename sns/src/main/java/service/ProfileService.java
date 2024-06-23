@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +17,6 @@ public class ProfileService implements IF_ProfileService{
 	//profile table에 insert
 	@Override
 	public void insert(ProfileVO pVO) throws Exception {
-		System.out.println(pVO.getId()+"SER");
 		pDao.insert(pVO);
 	}
 
@@ -39,10 +40,12 @@ public class ProfileService implements IF_ProfileService{
 
 	@Override
 	public String matchId(String id) throws Exception {
-		// TODO Auto-generated method stub
 		return pDao.matchId(id);
 	}
-	
-	
+
+	@Override
+	public List<ProfileVO> selectProfile(String id) throws Exception {
+		return pDao.selectProfile(id);
+	}
 
 }

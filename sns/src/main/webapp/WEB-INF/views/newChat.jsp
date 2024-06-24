@@ -15,7 +15,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <body class="theme">
-	<form encType="multipart/form-data" action="newChatSave" method="post">
+	<form encType="multipart/form-data" action="newChatSave" method="post"
+		id="form">
 		<input type="hidden" value="${nickName}" name="nickName">
 		<div id="newChatTitle">
 			<span>CREATE M</span>
@@ -38,7 +39,7 @@
 				</div>
 				<div id="createChatName" class="createChatItem">
 					<input type="text" name="chatName" id="chatName"
-						placeholder="사용하실 M 이름을 입력해주세요.">
+						placeholder="사용하실 M 이름을 입력해주세요." maxlength="15">
 				</div>
 				<div id="createFriendTitle" class="createChatItem">
 					<span>MEMBER</span>
@@ -49,7 +50,7 @@
 					</table>
 				</div>
 				<div id="create" class="createChatItem">
-					<input type="submit" id="createBtn" value="CREATE">
+					<input type="button" id="createBtn" value="CREATE">
 				</div>
 			</div>
 			<div id="createMember" class="theme">
@@ -102,17 +103,32 @@
 	</form>
 </body>
 <script>
+	const color = $('.theme').css("color");
+	const backColor = $('.theme').css("background-color");
+	
+	window.onload = function() {
+    	$('#followingBtn').css("background-color", "#ff00bf");
+    	$('#followingBtn').css("color", backColor);
+	}
 
     //following div block
     $('#followingBtn').click(function () {
         $('#followingList').css("display", "block")
+        $('#followingBtn').css("background-color", "#ff00bf");
+        $('#followingBtn').css("color", backColor);
         $('#followerList').css("display", "none")
+        $('#followerBtn').css("background-color", "transparent");
+        $('#followerBtn').css("color", "#ff00bf");
     })
 
     //follower div block
     $('#followerBtn').click(function () {
         $('#followingList').css("display", "none")
         $('#followerList').css("display", "block")
+        $('#followerBtn').css("background-color", "#ff00bf");
+        $('#followerBtn').css("color", backColor);
+        $('#followingBtn').css("background-color", "transparent");
+        $('#followingBtn').css("color", "#ff00bf");
     })
 
     const file = document.querySelector('#chatPhoto');
@@ -149,8 +165,6 @@
         }
     }
 
-    const color = $('.theme').css("color")
-
     //member 삭제
     $('#memberTable').on('click', '.memberTableTr svg', function() {
         const tr = $(this).closest('tr')
@@ -177,12 +191,10 @@
     })
     
     //submit
-   $('#createBtn').click(function(event) {
-	   event.preventDefault();
-	   const form = $('form')[0];
-	   const formData = new FormData(form);
-	   console.log(formData);
-        const memberArray = $('#memberTable').find('td');
+   $('#createBtn').click(function() {
+       	const memberArray = $('#memberTable').find('td');
+       	const form = $('#form')[0];
+       	const formData = new FormData(form);
         if (memberArray.length != 0) {
             const nick = new Array();
             const id = new Array();
@@ -194,16 +206,28 @@
             }
             $.ajax({
                 url: "newChatSave",
-                method: "post",
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: {
-                    form: $('form').serialize(),
+                type: "post",
+                enctype: "multipart/form_data",
+                data: formData,
+                success: function (result) {
+                	console.log(result);
+                   	$.ajax({
+                	   	url: "newChatMember",
+                	   	type: "post",
+                	   	traditional: true,
+                	  	data: {nicks: nick,
+                		   	ids: id,
+                		   	chat: result},
+                		success: function() {
+                			alert('성공')
+                		}
+                   })
                 },
-                success: function () {
-                    alert('성공')
-                }
+                error: function() {
+                	alert('잠시 후 다시 시도해주십시오.');
+                },
+                processData: false,
+                contentType: false
             })
         } else {
             alert("MEMBER을 추가해주세요.")

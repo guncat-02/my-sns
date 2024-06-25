@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,6 +26,24 @@ public class ChatDao implements IF_ChatDao {
 	@Override
 	public void chatMemberInsert(ChatRoomVO cVO) throws Exception {
 		sql.insert(mapperQuery+".chatMemberInsert", cVO);
+	}
+
+	//chatmember table count select 
+	@Override
+	public int chatMemberSelect(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".chatMemberSelect", id);
+	}
+
+	//chatmember table의 nickanme select
+	@Override
+	public List<String> select(String id) throws Exception {
+		return sql.selectList(mapperQuery+".select", id);
+	}
+
+	//chatlist select
+	@Override
+	public List<ChatRoomVO> chatList(String nickName) throws Exception {
+		return sql.selectList(mapperQuery+".chatList", nickName);
 	}
 	
 }

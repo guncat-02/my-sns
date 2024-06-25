@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,7 @@ import service.IF_ProfileService;
 import util.FileDataUtil;
 import util.RandomCode;
 import vo.ChatRoomVO;
+import vo.ProfileVO;
 
 @Controller
 public class ChatController {
@@ -34,13 +38,25 @@ public class ChatController {
 	@Inject
 	RandomCode rdCode;
 	
+	//profile view로 이동
 	@GetMapping("selProfile")
 	public String selProfile(HttpSession session, Model model) throws Exception {
 		String id = String.valueOf(session.getAttribute("userid"));
-		model.addAttribute("profile", pServe.selectProfile(id));
+		List<ProfileVO> pro = pServe.selectProfile(id);
+		model.addAttribute("profile", pro);
+		List<String> nick = cServe.select(id);
+		for(int i = 0; i < pro.size(); i++) {
+			for(int j = 0; j < nick.size(); j++) {
+				if(pro.get(i).getNickName().equals(nick.get(j))) {
+					nick.set(j, nick.get(j)+"chat");
+				}
+			}
+		}
+		model.addAttribute("cnt", nick);
 		return "selProfile";
 	}
 	
+	//newChat view로 이동
 	@GetMapping("newChat")
 	public String newChat(HttpSession session, Model model, @RequestParam("nickName") String nick) throws Exception {
 		model.addAttribute("nickName", nick);
@@ -50,6 +66,16 @@ public class ChatController {
 		return "newChat";
 	}
 	
+	//chat start view로 이동
+	@GetMapping("chatStart")
+	public String chatStart(HttpSession session) throws Exception {
+		if(cServe.chatMemberSelect(String.valueOf(session.getAttribute("userid"))) > 0) {
+			return "redirect:selProfile";
+		}
+		return "chatStart";
+	}
+	
+	//chatroom table에 insert
 	@ResponseBody
 	@PostMapping("newChatSave")
 	public String newChatSave(@ModelAttribute ChatRoomVO cVO, MultipartFile[] chatPhoto, HttpSession session) throws Exception {
@@ -68,8 +94,9 @@ public class ChatController {
 		return cVO.getChatNum();
 	}
 	
+	//chatMember table에 insert
 	@PostMapping("newChatMember")
-	public String newChatMember(HttpServletRequest request) throws Exception {
+	public void newChatMember(HttpServletRequest request) throws Exception {
 		ChatRoomVO cVO = new ChatRoomVO();
 		String chatNum = request.getParameter("chat");
 		String[] id = request.getParameterValues("ids");
@@ -80,6 +107,12 @@ public class ChatController {
 			cVO.setNickName(nick[i]);
 			cServe.chatMemberInsert(cVO);
 		}
-		return "chatting";
+	}
+	
+	@GetMapping("chat")
+	public String chat(@RequestParam("nickName") String nickName, Model model) throws Exception {
+		model.addAttribute("nickName", nickName);
+		model.addAttribute("chatList", cServe.chatList(nickName));
+		return "chat";
 	}
 }

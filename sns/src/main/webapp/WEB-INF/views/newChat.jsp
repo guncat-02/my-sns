@@ -17,7 +17,7 @@
 <body class="theme">
 	<form encType="multipart/form-data" action="newChatSave" method="post"
 		id="form">
-		<input type="hidden" value="${nickName}" name="nickName">
+		<input type="hidden" value="${nickName}" name="nickName" id="nickName">
 		<div id="newChatTitle">
 			<span>CREATE M</span>
 		</div>
@@ -39,7 +39,7 @@
 				</div>
 				<div id="createChatName" class="createChatItem">
 					<input type="text" name="chatName" id="chatName"
-						placeholder="사용하실 M 이름을 입력해주세요." maxlength="15">
+						placeholder="사용하실 M 이름을 입력해주세요." maxlength="8">
 				</div>
 				<div id="createFriendTitle" class="createChatItem">
 					<span>MEMBER</span>
@@ -192,6 +192,7 @@
     
     //submit
    $('#createBtn').click(function() {
+	   $('#createBtn').disabled = false;
        	const memberArray = $('#memberTable').find('td');
        	const form = $('#form')[0];
        	const formData = new FormData(form);
@@ -209,17 +210,18 @@
                 type: "post",
                 enctype: "multipart/form_data",
                 data: formData,
+                async: false,
                 success: function (result) {
-                	console.log(result);
                    	$.ajax({
                 	   	url: "newChatMember",
                 	   	type: "post",
                 	   	traditional: true,
+                	   	async: false,
                 	  	data: {nicks: nick,
                 		   	ids: id,
                 		   	chat: result},
                 		success: function() {
-                			alert('성공')
+                			console.log('성공')
                 		}
                    })
                 },
@@ -229,6 +231,7 @@
                 processData: false,
                 contentType: false
             })
+            location.href = "chat?nickName="+$('#nickName').val();
         } else {
             alert("MEMBER을 추가해주세요.")
         }

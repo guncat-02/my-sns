@@ -13,6 +13,9 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body class="theme">
+	<c:forEach var="chatCnt" items="${cnt}">
+		<input type="hidden" class="proCnt" value="${chatCnt}">
+	</c:forEach>
 	<div id="selectProfileTitle">
 		<span>SELECT YOUR PROFILE</span>
 		<p>각 프로필마다 새로운 채팅을 즐길 수 있습니다!</p>
@@ -21,7 +24,10 @@
 		<c:forEach var="pro" items="${profile}">
 			<div class="selProfile">
 				<div class="selectProfileCircle">
-					<img src="download?filename=${pro.photo}">
+					<c:choose>
+						<c:when test="${pro.photo != null}"><img src="download?filename=${pro.photo}"></c:when>
+						<c:when test="${pro.photo == null}"><img src="./resources/img/프로필.png"></c:when>
+					</c:choose>
 				</div>
 				<div class="selectProfileNick">
 					<span>${pro.nickName}</span>
@@ -32,7 +38,19 @@
 </body>
 <script>
     $('.selProfile').click(function() {
-        location.href = "newChat?nickName="+$(this).find('span').text();
+        const nick = $(this).find('span').text();
+        const chat = $('.proCnt');
+        if(chat.length != 0) {
+        	for(let i = 0; i < chat.length; i++) {
+                if(chat[i].value.includes(nick)) {
+                    location.href = "chat?nickName="+nick;
+                } else {
+                    location.href = "newChat?nickName="+nick;
+                }
+            }	
+        } else {
+        	location.href = "newChat?nickName="+nick;
+        }
     })
 </script>
 </html>

@@ -10,4 +10,5 @@ public interface IF_ChatDao {
 	public int chatMemberSelect(String id) throws Exception;
 	public List<String> select(String id) throws Exception;
 	public List<ChatRoomVO> chatList(String nickName) throws Exception;
+	public List<ChatRoomVO> chatMemberList(String chatNum) throws Exception;
 }

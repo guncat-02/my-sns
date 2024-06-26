@@ -45,5 +45,11 @@ public class ChatDao implements IF_ChatDao {
 	public List<ChatRoomVO> chatList(String nickName) throws Exception {
 		return sql.selectList(mapperQuery+".chatList", nickName);
 	}
+
+	//chatMember list
+	@Override
+	public List<ChatRoomVO> chatMemberList(String chatNum) throws Exception {
+		return sql.selectList(mapperQuery+".chatMemberList", chatNum);
+	}
 	
 }

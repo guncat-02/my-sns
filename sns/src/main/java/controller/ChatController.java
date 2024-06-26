@@ -109,6 +109,7 @@ public class ChatController {
 		}
 	}
 	
+	//chatting view로 이동
 	@GetMapping("chat")
 	public String chat(@RequestParam("nickName") String nickName, Model model) throws Exception {
 		model.addAttribute("nickName", nickName);

@@ -45,8 +45,16 @@ public class ProfileDao implements IF_ProfileDao{
 		return sql.selectOne(mapperQuery+".matchId", id);
 	}
 
+	//아이디와 일치한 모든 프로필 불러오기
 	@Override
 	public List<ProfileVO> selectProfile(String id) throws Exception {
 		return sql.selectList(mapperQuery+".selectProfile", id);
+	}
+
+	//채팅 시 프로필 불러오기
+	@Override
+	public List<ProfileVO> profileList(List<String> nick) throws Exception {
+		System.out.println("넘어옴");
+		return sql.selectList(mapperQuery+".profileList", "nick");
 	}
 }

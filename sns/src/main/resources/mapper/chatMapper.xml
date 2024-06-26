@@ -27,4 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="chatList" parameterType="String" resultType="vo.ChatRoomVO">
 		select * from chatRoomTest where nickName = #{nickName}
 	</select>
+	<select id="chatMemberList" parameterType="String" resultType="vo.ChatRoomVO">
+		select * from chatMemberTest where chatNum = #{chatNum}
+	</select>
 </mapper>

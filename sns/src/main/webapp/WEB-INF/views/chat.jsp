@@ -12,6 +12,7 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body class="theme">
+	<input type="hidden" value="${nickName}" id="user">
     <div id="chatAll">
         <div id="chatMenu" class="chatItem">
             <ul>
@@ -301,19 +302,33 @@
     	}
         $('#nowChat').load(window.location.href + " #nowChatting");
         $('#nowInput').load(window.location.href + " #nowInput div");
-        contAjax();
+        contAjax(chatNum);
     });
     
     //cont내용을 들고 오기 위한 ajax
-    function contAjax() {
+    function contAjax(chat) {
+    	console.log(chat);
         $.ajax({
-            url: "chat/conts",
+            url: "/sns/chat/conts",
             type: "post",
-            data: chatNum,
+            data: {chatNum: chat},
             success: function(result) {
+            	const user = $('#user').val();
                 const chatCont = result;
-                console.log(chatCont.length)
+                proAjax(chat);
             }
+        })
+    }
+    
+    function proAjax(chat) {
+        $.ajax({
+        	url: "/sns/chat/users",
+        	type: "post",
+        	data: {chatNum: chat},
+        	traditional: true,
+        	success: function(result) {
+        		console.log(result)
+        	}
         })
     }
 </script>

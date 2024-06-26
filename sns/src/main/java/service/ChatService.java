@@ -44,4 +44,10 @@ public class ChatService implements IF_ChatService{
 		return cDao.chatList(nickName);
 	}
 
+	//chatMember list
+	@Override
+	public List<ChatRoomVO> chatMemberList(String chatNum) throws Exception {
+		return cDao.chatMemberList(chatNum);
+	}
+
 }

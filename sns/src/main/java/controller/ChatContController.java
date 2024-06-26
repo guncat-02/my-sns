@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,10 +32,10 @@ public class ChatContController {
 	@PostMapping("chat/conts")
 	public List<ChatContVO> selectCont(@RequestParam("chatNum") String chatNum) throws Exception {
 		List<ChatContVO> cont = ccServe.selectCont(chatNum);
-		if(cont != null) {
-			return cont;
+		for(int i = 0; i < cont.size(); i++) {
+			cont.get(i).setChatTime(cont.get(i).getChatTime().substring(0, 16));
 		}
-		return null;
+		return cont;
 	}
 	
 	//유저의 프로필을 불러오기 위한 메서드
@@ -47,5 +48,11 @@ public class ChatContController {
 			nick.add(c.get(i).getNickName());
 		}
 		return pServe.profileList(nick);
+	}
+	
+	//채팅을 insert 하기 위한 메서드
+	@PostMapping("chat/chatting")
+	public void insert(@ModelAttribute ChatContVO ccVO) throws Exception {
+		ccServe.insert(ccVO);
 	}
 }

@@ -21,7 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="selectProfile" resultType="vo.ProfileVO" parameterType="String">
 	select * from profileTest where id = #{id}
 </select>
-<select id="profileList" resultType="vo.ProfileVO" parameterType="String">
-	select * from profileTest 
+<select id="profileList" resultType="vo.ProfileVO" parameterType="java.util.List">
+	select * from profileTest where nickName in
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
 </select>
 </mapper>

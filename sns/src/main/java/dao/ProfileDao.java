@@ -54,7 +54,6 @@ public class ProfileDao implements IF_ProfileDao{
 	//채팅 시 프로필 불러오기
 	@Override
 	public List<ProfileVO> profileList(List<String> nick) throws Exception {
-		System.out.println("넘어옴");
-		return sql.selectList(mapperQuery+".profileList", "nick");
+		return sql.selectList(mapperQuery+".profileList", nick);
 	}
 }

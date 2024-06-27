@@ -130,6 +130,9 @@
 					</div>
 				</div>
 			</div>
+			<div id="chatCover" class="chatItem theme">
+				<span>M</span>
+            </div>
 		</div>
 		<div id="emojiAll" class="theme">
 			<table id="emojiAllTable">
@@ -270,8 +273,8 @@
 
     //채팅 추가
     $('#chattingText').keydown(function (e) {
-        if ($('#chattingText').val().trim() != "") {
-            if (e.keyCode == 13) {
+        if (e.keyCode == 13) {
+            if ($('#chattingText').val().trim() != "" || file.files.length != 0) {
                	const form = $('#form')[0];
                	const formData = new FormData(form);
             	$.ajax({
@@ -286,14 +289,18 @@
             		processData: false,
                 	contentType: false
             	})
-            	$('#chattingText').val("")
-            	$('#nowChat').load(window.location.href + " #nowChatting");
+            	$('#chatImgList').empty();
+            	$('#chatAttachBox').css("display", "none");
+            	dataSave.items.clear();
+            	file.files = dataSave.files;
+            	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
             }
         }
     })
     
     //그룹방 선택 시
     $('.chatInfo').click(function() {
+    	$('#chatCover').css("display", "none")
     	$('#nowChatting').empty();
         $('#nowInput').load(window.location.href + " #nowInput div");
     	const index = $('.chatInfo').index($(this));
@@ -386,6 +393,7 @@
                 }
             }	
     	}
+    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
     }
 </script>
 </html>

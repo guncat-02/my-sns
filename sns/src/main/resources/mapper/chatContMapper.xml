@@ -9,4 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="vo.ChatContVO">
 		insert into chatContTest values (chatTest_no.nextval, #{chatNum}, #{nickName}, #{cont}, default)
 	</insert>
+	<insert id="fileInsert" parameterType="String">
+		insert into chatContTest values ()
+	</insert>
 </mapper>

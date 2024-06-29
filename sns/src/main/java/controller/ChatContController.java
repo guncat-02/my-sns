@@ -58,14 +58,13 @@ public class ChatContController {
 	//채팅을 insert 하기 위한 메서드
 	@PostMapping("chat/chatting")
 	public void insert(@ModelAttribute ChatContVO ccVO, MultipartFile[] chatFile) throws Exception {
-		if(ccVO.getCont() != null && ccVO.getCont().trim() != " ") {
-//			ccServe.insert(ccVO);
-			System.out.println("글 들어옴"+ccVO.getCont());
+		if(ccVO.getCont() != null && !ccVO.getCont().trim().equals("")) {
+			ccServe.insert(ccVO);
 		}
 		String[] files = upload.fileUpload(chatFile);
 		if(files[0] != null) {
 			ccVO.setChatAttach(files);
-			System.out.println("파일 들어옴"+ccVO.getChatAttach());
+			ccServe.insertAttach(ccVO);
 		}
 	}
 }

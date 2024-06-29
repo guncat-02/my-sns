@@ -550,12 +550,22 @@ input::-webkit-search-results-decoration{
 
 #chatCover {
     text-align: center;
+	position: relative;
+}
+
+#chatCoverDiv {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	margin-top: -100px;
+	left: 50%;
+	margin-left: -100px;
 }
 
 #chatCover span {
     font-size: 150px;
     color: #ff00bf;
     display: block;
-    margin-top: 38%;
     text-shadow: #00f7ff 3px 3px;
 }

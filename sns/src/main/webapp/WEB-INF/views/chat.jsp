@@ -131,7 +131,7 @@
 				</div>
 			</div>
 			<div id="chatCover" class="chatItem theme">
-				<span>M</span>
+				<div id="chatCoverDiv"><span>M</span></div>
             </div>
 		</div>
 		<div id="emojiAll" class="theme">
@@ -274,7 +274,8 @@
     //채팅 추가
     $('#chattingText').keydown(function (e) {
         if (e.keyCode == 13) {
-            if ($('#chattingText').val().trim() != "" || file.files.length != 0) {
+        	text = $('#chattingText').val();
+            if ((text != null && text.trim() != "")|| file.files.length != 0) {
                	const form = $('#form')[0];
                	const formData = new FormData(form);
             	$.ajax({
@@ -285,15 +286,15 @@
             		success: function() {
             			$('#chattingText').val("");
             			$('#nowChat').load(window.location.href + " #nowChatting");
+            			$('#chatImgList').empty();
+                    	$('#chatAttachBox').css("display", "none");
+                    	dataSave.items.clear();
+                    	file.files = dataSave.files;
+                    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
             		},
             		processData: false,
                 	contentType: false
             	})
-            	$('#chatImgList').empty();
-            	$('#chatAttachBox').css("display", "none");
-            	dataSave.items.clear();
-            	file.files = dataSave.files;
-            	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
             }
         }
     })

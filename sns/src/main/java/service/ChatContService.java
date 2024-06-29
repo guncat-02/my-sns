@@ -1,6 +1,8 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -26,4 +28,18 @@ public class ChatContService implements IF_ChatContService {
 		ccDao.insert(ccVO);
 	}
 
+	//chatAttach table에 insert
+	@Override
+	public void insertAttach(ChatContVO ccVO) throws Exception {
+		System.out.println("넘어옴");
+		Map<String, Object> attach = new HashMap<>();
+		attach.put("vo", ccVO);
+		for(String file: ccVO.getChatAttach()) {
+			attach.put("file", file);
+			ccDao.insertAttach(attach);
+			System.out.println("ㅗㅑ");
+		}
+	}
+
+	
 }

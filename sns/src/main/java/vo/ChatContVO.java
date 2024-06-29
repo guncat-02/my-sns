@@ -6,7 +6,8 @@ public class ChatContVO {
 	private String nickName;
 	private String cont;
 	private String chatTime;
-	private String[] chatAttach;
+	private String[] attachList;
+	private String chatAttach;
 	
 	//getter
 	public int getNo() {
@@ -24,7 +25,10 @@ public class ChatContVO {
 	public String getChatTime() {
 		return chatTime;
 	}
-	public String[] getChatAttach() {
+	public String[] getAttachList() {
+		return attachList;
+	}
+	public String getChatAttach() {
 		return chatAttach;
 	}
 	
@@ -44,7 +48,10 @@ public class ChatContVO {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
-	public void setChatAttach(String[] chatAttach) {
+	public void setAttachList(String[] attachList) {
+		this.attachList = attachList;
+	}
+	public void setChatAttach(String chatAttach) {
 		this.chatAttach = chatAttach;
 	}
 }

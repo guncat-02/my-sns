@@ -9,6 +9,7 @@ body {
 	-ms-user-select: none;
 	user-select: none;
     width: auto;
+    position: relative;
 }
 
 #form {
@@ -568,4 +569,20 @@ input::-webkit-search-results-decoration{
     color: #ff00bf;
     display: block;
     text-shadow: #00f7ff 3px 3px;
+}
+
+.chattingImg {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+}
+
+#imgDiv {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    top: 10%;
+    left: 50%;
+    margin-top: - calc(fit-content);
+    margin-left: - calc(fit-content);
 }

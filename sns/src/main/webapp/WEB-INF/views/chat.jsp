@@ -145,6 +145,9 @@
 			<div id="chatImgList"></div>
 		</div>
 	</form>
+	<div id="imgDiv">
+		<img id="bigImg">
+	</div>
 </body>
 <script>
 	let chatNum;
@@ -283,34 +286,29 @@
             		type: "post",
             		enctype: "multipart/form_data",
             		data: formData,
-            		success: function() {
-            			$('#chattingText').val("");
-            			$('#nowChat').load(window.location.href + " #nowChatting");
-            			$('#chatImgList').empty();
-                    	$('#chatAttachBox').css("display", "none");
-                    	dataSave.items.clear();
-                    	file.files = dataSave.files;
-                    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
-            		},
+            		async: false,
             		processData: false,
                 	contentType: false
             	})
             }
+            resetChat();
+            contAjax(chatNum);
         }
     })
     
+    let chatIndex;
+    
     //그룹방 선택 시
     $('.chatInfo').click(function() {
-    	$('#chatCover').css("display", "none")
-    	$('#nowChatting').empty();
-        $('#nowInput').load(window.location.href + " #nowInput div");
-    	const index = $('.chatInfo').index($(this));
-    	chatNum = $('.infoNum').eq(index).val();
-    	switchInput(index);
-    	const img = $('.infoImg').eq(index).val();
+    	$('#chatCover').css("display", "none");
+    	resetChat();
+        chatIndex = $('.chatInfo').index($(this));
+    	chatNum = $('.infoNum').eq(chatIndex).val();
+    	switchInput(chatIndex);
+    	const img = $('.infoImg').eq(chatIndex).val();
     	$('.userSel').css("display","none")
-    	$('.userSel').eq(index).css("display", "block");
-    	$('#nowUserName').text($('.infoName').eq(index).text())
+    	$('.userSel').eq(chatIndex).css("display", "block");
+    	$('#nowUserName').text($('.infoName').eq(chatIndex).text())
     	if(img != null && img.trim() != "") {
     		$('#nowUserImg').attr('src', "download?filename="+img)
     	} else {
@@ -318,6 +316,16 @@
     	}
         contAjax(chatNum);
     });
+    
+    //채팅 초기화
+    function resetChat() {
+    	$('#nowChatting').empty();
+    	$('#chattingText').val("");
+    	$('#chatAttachBox').css("display", "none");
+    	dataSave.items.clear();
+    	file.files = dataSave.files;
+    	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight);
+    }
     
     //true false 변환
     function switchInput(index) {
@@ -377,7 +385,11 @@
                     $('#nowChatting').append("<thead><tr><td colspan='2' class='allDate'><div><hr>"+firstDate+"<hr></div></td></tr></thead>")
                 }
                 if (chatCont[i].nickName == user) {
-                    $('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+                	if(chatCont[i].cont != null && chatCont[i].cont.trim() != "") {
+                		$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'>" + chatCont[i].cont + "</div></div></td></tr>");
+                	} else {
+                		$('#nowChatting').append("<tr><td class='chatCont'><div class='chatting myChatting'><div class='chatUserDate myChatDate'><span>" + time + "</span></div><div class='userChat myChat'><img src=download?filename=" + chatCont[i].chatAttach + " class='chattingImg'></div></div></td></tr>");
+                	}
                     $('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
                 } else if (chatCont[i].nickName != user) {
                     for (let j = 0; j < usersProfile.length; j++) {
@@ -396,5 +408,10 @@
     	}
     	$('#nowChat').scrollTop($('#nowChat')[0].scrollHeight)
     }
+    
+    //이미지 크게보기
+    $('#nowChatting').on('click', '.chattingImg', function() {
+    	$('#bigImg').attr('src', $(this).attr('src'));
+    })
 </script>
 </html>

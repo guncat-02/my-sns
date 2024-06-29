@@ -63,7 +63,7 @@ public class ChatContController {
 		}
 		String[] files = upload.fileUpload(chatFile);
 		if(files[0] != null) {
-			ccVO.setChatAttach(files);
+			ccVO.setAttachList(files);
 			ccServe.insertAttach(ccVO);
 		}
 	}

@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>momentum</title>
+<link rel="stylesheet" href="./resources/css/search.css">
+<link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
 </head>
 <body class="theme">
     <div id="all">

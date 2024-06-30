@@ -52,6 +52,12 @@
 							</span>
 							</td>
 						</tr>
+						<tr class="userInfo" style="display: none;">
+							<td class="userList" colspan="2">
+								<div class="userListDiv">
+								</div>
+							</td>
+						</tr>
 					</c:forEach>
 				</table>
 			</div>
@@ -350,7 +356,6 @@
             	const user = $('#user').val();
                 const chatCont = result;
                 let usersProfile = proAjax(chat);
-       			lastNum = chatCont[chatCont.length-1].no;
                 chatInsert(chatCont, usersProfile, user);            
             }
         })
@@ -372,8 +377,23 @@
         return usersProfile;
     }
     
+    //userList 추가
+    function userList(index, users) {
+    	$('.userListDiv').empty();
+    	$('.userInfo').css('display', 'none')
+    	$('.userInfo').eq(index).css('display', 'table');
+    	for(let i = 0; i < users.length; i++) {
+    		if(users[i].nickName == $('#user').val()) {
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; color: #ff00bf;'>"+users[i].nickName+" (M)</span>");
+    		} else {
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    		}
+    	}   	
+    }
+    
     //cont 내용 추가
-    function chatInsert(chatCont, usersProfile, user) {
+    function chatInsert(chatCont, usersProfile, user) {	
+    	userList(chatIndex, usersProfile);
     	if(chatCont != null && chatCont.length != 0) {
     		let spDate = chatCont[0].chatTime.split(' ');
             let firstDate = spDate[0];

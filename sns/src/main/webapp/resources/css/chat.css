@@ -592,3 +592,10 @@ input::-webkit-search-results-decoration{
 	max-width: 100%;
 	height: auto;
 }
+
+.userListDiv {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}

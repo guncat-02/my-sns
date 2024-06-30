@@ -19,31 +19,69 @@
         <div id="main">
             <!--메인 컨텐츠는 여기에 작성 부탁합니당-->
             <form action="searchList" method="get" onsubmit="return searchSubmit()">
-                <div id="searchBar">
-                    <div id="searIcon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-search-heart" viewBox="0 0 16 16">
-                            <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018" />
-                            <path
-                                d="M13 6.5a6.47 6.47 0 0 1-1.258 3.844q.06.044.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11" />
-                        </svg>
+                <div id="searchBar" class="theme">
+                    <input type="search" id="search" placeholder="SEARCH">
+                    <div id="miniSearch">
+                        <div id="miniSearchTitle">
+                            <span id="searDel">모두 지우기</span>
+                        </div>
+                        <table id="miniSearchTable">
+                            
+                        </table>
                     </div>
-                    <input type="search" id="search" placeholder="SEARCH" name="keyWord">
                 </div>
             </form>
             <div id="trendyTitle">
                 <span>TRENDY</span>
             </div>
+            <div id="trendyDiv">
+                <div id="trendy">
+                    <table id="trendyTable">
+                        <tr>
+                            <td style="width: 90%;" class="trendyWord"><span>안녕</span><p>2000 posts</p></td>
+                            <td style="width: 10%; text-align: right;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                  </svg>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="plusTrendy">
+                <span>+</span>
+            </div>
         </div>
     </div>
 </body>
 <script>
+	//검색 기록 추가
+	window.onload = function() {
+		if(localStorage.getItem('searWord') != null) {
+			$('#miniSearchTable').append("<tr><td class='searListWord' style='width: 90%'>"+localStorage.getItem('searWord')+"</td><td style='width: 10% text-align: right;'><span class='searListDel'>X</span></td></tr>")
+		}	
+	}
+	
 	//검색어가 없을 경우 submit x
 	function searchSubmit() {
 		if($('#search').val().trim() != "" && $('#search').val() != null) {
+			localStorage.setItem('searWord', $('#search').val())
 			return true;
 		}
 		return false;
 	}
+	
+	//검색어 클릭 시 검색 기록 확인
+	$('#search').click(function() {
+		if(localStorage.getItem('searWord') != null) {
+			$('#miniSearch').css('display', 'block');	
+		}
+	})
+	
+	//trendy 단어 더보기
+    $('#plusTrendy').click(function() {
+        $('#plusTrendy').css('display', 'none');
+        $('#trendyDiv').css('overflow', 'inherit');
+    })
 </script>
 </html>

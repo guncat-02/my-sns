@@ -32,40 +32,30 @@ body {
 }
 
 #searchBar {
+    position: fixed;
     display: flex;
-    justify-content: space-between;
-    border: 2px solid #00f7ff;
+    flex-direction: column;
+    border: 2px solid #ff00bf;
     border-radius: 15px;
-    width: 95%;
-    height: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 15px;
-}
-
-#searIcon {
-    width: 7%;
-    height: 100%;
-    text-align: center;
-}
-
-.bi-search-heart {
     width: 80%;
-    height: 80%;
-    margin-top: 10%;
-    color: #ff00bf;
-    margin-left: 10%;
+    height: fit-content;
+    border-radius: 15px;
+    margin: 15px;
+    margin-left: 2%;
 }
 
 #search {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bolder;
-    width: 92%;
+    width: 98%;
     border-radius: 15px;
     background-color: transparent;
     border: none;
     color: #ff00bf;
     font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
 }
 
 #search:focus {
@@ -87,7 +77,7 @@ body {
 #trendyTitle {
     width: 95%;
     height: 42px;
-    margin-top: 2%;
+    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -96,4 +86,112 @@ body {
     display: block;
     font-size: 35px;
     color: #00f7ff;
+}
+
+#miniSearch {
+    width: 100%;
+    height: fit-content;
+  	display: none;
+}
+
+#miniSearchTable {
+    width: 98%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+#miniSearchTable td {
+	border: 1px solid;
+}
+
+#miniSearchTable span {
+	border: 1px solid;
+}
+
+#miniSearchTable tr {
+	display: table;
+    width: 100%;
+}
+
+#search:-webkit-autofill, #search:-webkit-autofill:hover, #search:-webkit-autofill:focus, #search:-webkit-autofill:active{
+    -webkit-text-fill-color: #ff00bf;
+    font-size: 18px;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    box-shadow: 0 0 0 1000px transparent inset;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+#miniSearchTitle {
+	text-align: right;
+    margin-right: 2%;
+}
+
+#trendy {
+    width: 100%;
+    height: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#trendyTable {
+    width: 100%;
+    height: 100%;
+}
+
+#trendyTable tr {
+    display: table;
+    width: 100%;
+    height: 100px;
+}
+
+#trendyTable td {
+    border-top: 1px solid #00f7ff;
+}
+
+#trendyTable svg {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+#trendyTable span {
+    font-size: 25px;
+}
+
+#trendyTable p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#trendyDiv {
+    width: 95%;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#plusTrendy {
+    border-top: 1px solid #00f7ff;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 40px;
+    color: #ff00bf;
+    cursor: pointer;
+}
+
+.trendyWord {
+    cursor: pointer;
+}
+
+#searDel, .searListDel {
+	color: #00f7ff;
+	cursor: pointer;
 }

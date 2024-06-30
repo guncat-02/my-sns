@@ -151,6 +151,7 @@
 </body>
 <script>
 	let chatNum;
+	let lastNum;
 
     //window 시작 시 기본 설정
     window.onload = function () {
@@ -349,6 +350,7 @@
             	const user = $('#user').val();
                 const chatCont = result;
                 let usersProfile = proAjax(chat);
+       			lastNum = chatCont[chatCont.length-1].no;
                 chatInsert(chatCont, usersProfile, user);            
             }
         })
@@ -411,7 +413,31 @@
     
     //이미지 크게보기
     $('#nowChatting').on('click', '.chattingImg', function() {
+    	$('#imgDiv').css('display', 'block');
     	$('#bigImg').attr('src', $(this).attr('src'));
+    })
+    
+    //이미지 없애기
+    $('#imgDiv').click(function(){
+    	$('#imgDiv').css('display', 'none');  	
+    })
+    
+    //채팅방 검색
+    $('#chatSearch').keydown(function(e) {
+    	if (e.keyCode == 13) {
+    		let searWord = $('.infoName')
+    		if($('#chatSearch').val().trim != "") {
+    			$('.chatInfo').css('display', 'none')
+    			let word = $('#chatSearch').val()
+    			for(let i = 0; i < searWord.length; i++) {
+    				if(searWord[i].innerText.includes(word)) {
+    					$('.chatInfo').eq(i).css('display', 'table');
+    				}
+    			}
+    		} else {
+    			$('.chatInfo').css('display', 'table')
+    		}
+    	}
     })
 </script>
 </html>

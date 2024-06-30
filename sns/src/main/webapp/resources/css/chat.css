@@ -579,10 +579,16 @@ input::-webkit-search-results-decoration{
 
 #imgDiv {
     position: absolute;
-    width: fit-content;
-    height: fit-content;
-    top: 10%;
+    width: 600px;
+    height: 600px;
+    top: 50%;
     left: 50%;
-    margin-top: - calc(fit-content);
-    margin-left: - calc(fit-content);
+    margin-top: -300px;
+    margin-left: -300px;
+    display: none;
+}
+
+#bigImg {
+	max-width: 100%;
+	height: auto;
 }

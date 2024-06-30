@@ -4,10 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>momentum sns</title>
+<title>momentum</title>
 <link rel="stylesheet" href="./resources/css/start.css">
+   <style>
+    body {
+      opacity: 1;
+      transition-duration: 1s;
+      transition-property: opacity;
+    }
+
+    body.fade {
+      opacity: 0;
+    }
+
+  </style>
 </head>
-<body>
+
+<body class="fade">
     <div id="logoPage">
         <span id="logo">M</span>
     </div>
@@ -16,7 +29,13 @@
 <script>
     window.onload = function() {
         window.setTimeout(function() {
-            location.href = "/sns/login";
-        }, 1000)
+            location.href = "/sns/loginpage";
+        }, 3000)
     }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(() => {
+          document.body.classList.remove('fade');
+        });
+      });
 </script>

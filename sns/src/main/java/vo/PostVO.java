@@ -5,11 +5,14 @@ public class PostVO {
 	private int re_no; //리포스트 번호
 	private String cont; //글 내용
 	private int show; //조회수
-	private int loveCnt; //좋아요 수
 	private String[] filename; //첨부 파일
 	private int privacy; //글 공개 여부
 	private int c_block; //댓글 차단 여부
-	
+	private String id; //작성자 id
+	private String p_date; //글 작성일
+	private int commCnt; // 글의 댓글 수
+	private int p_love; // 글의 좋아요 수
+	private int reCnt; // 글의 좋아요 수
 	//getter
 	public int getNo() {
 		return no;
@@ -23,9 +26,6 @@ public class PostVO {
 	public int getShow() {
 		return show;
 	}
-	public int getLoveCnt() {
-		return loveCnt;
-	}
 	public String[] getFilename() {
 		return filename;
 	}
@@ -35,7 +35,21 @@ public class PostVO {
 	public int getC_block() {
 		return c_block;
 	}
-	
+	public String getP_date() {
+		return p_date;
+	}
+	public String getId() {
+		return id;
+	}
+	public int getCommCnt() {
+		return commCnt;
+	}
+	public int getP_love() {
+		return p_love;
+	}
+	public int getReCnt() {
+		return reCnt;
+	}
 	//setter
 	public void setNo(int no) {
 		this.no = no;
@@ -49,9 +63,6 @@ public class PostVO {
 	public void setShow(int show) {
 		this.show = show;
 	}
-	public void setLoveCnt(int loveCnt) {
-		this.loveCnt = loveCnt;
-	}
 	public void setFilename(String[] filename) {
 		this.filename = filename;
 	}
@@ -60,5 +71,20 @@ public class PostVO {
 	}
 	public void setC_block(int c_block) {
 		this.c_block = c_block;
+	}
+	public void setP_date(String p_date) {
+		this.p_date = p_date;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public void setCommCnt(int commCnt) {
+		this.commCnt = commCnt;
+	}
+	public void setP_love(int p_love) {
+		this.p_love = p_love;
+	}
+	public void setReCnt(int reCnt) {
+		this.reCnt = reCnt;
 	}
 }

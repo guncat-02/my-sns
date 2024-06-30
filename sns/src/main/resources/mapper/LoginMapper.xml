@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_LoginDao">
+	
+	<select id="loginchk" resultType="vo.MemberVO" parameterType="String">
+		select * from membertest where id=#{id}
+	</select>
+	
+	<select id="changechkid" resultType="String" parameterType="String">
+		select * from membertest where id=#{id}
+	</select>
+	
+	<update id="updatepw" parameterType="vo.MemberVO">
+		update membertest set pass=#{pass} where id = #{id}
+	</update>
+</mapper>

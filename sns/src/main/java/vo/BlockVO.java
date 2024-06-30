@@ -1,8 +1,7 @@
 package vo;
 
-import java.util.List;
-
 public class BlockVO {
+	private String id;
 	private String blockId; //차단 아이디
 	private String reason; //차단 사유
 	
@@ -13,6 +12,9 @@ public class BlockVO {
 	public String getReason() {
 		return reason;
 	}
+	public String getId() {
+		return id;
+	}
 	
 	//setter
 	public void setReason(String reason) {
@@ -20,5 +22,8 @@ public class BlockVO {
 	}
 	public void setBlockId(String blockId) {
 		this.blockId = blockId;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }

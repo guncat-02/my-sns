@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IF_FollowListDao">
+	
+	<!-- 나를 팔로우하는 id 중 나도 팔로우하는 id의 profile select -->
+	<select id="selectInterFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from
+		(select id from
+		(select a.id as id, a.followid as followid, b.id as fid, b.followid as ffollowid
+		from followTest a, followTest b
+		where a.id = b.followid
+		and a.followid = #{followid})
+		where followid = fid) f, profileTest p
+		where f.id = p.id and p.p_main = 1
+	</select>
+	
+	<!-- 나를 팔로우하는 id 중 나는 팔로우하지 않는 id의 profile select -->
+	<select id="selectFollowersProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from profileTest p, (
+		select id from followTest where followid = #{followid} and id not in (
+		select id from
+		(select a.id as id, a.followid as followid, b.id as fid, b.followid as ffollowid
+		from followTest a, followTest b
+		where a.id = b.followid
+		and a.followid = #{followid})
+		where followid = fid)
+		)f
+		where p.id = f.id and p.p_main = 1
+	</select>
+	
+	<!-- 내가 팔로우하는 id의 profile select -->
+	<select id="selectFollowingsProfile" parameterType="String" resultType="vo.ProfileVO">
+		select p.* from profileTest p, followTest f where f.id = #{id} and p.p_main = 1 and f.followid = p.id
+	</select>
+	
+	<select id="selectFollowingsId" parameterType="String" resultType="String">
+		select followId from followTest where id = #{id}
+	</select>
+	
+	<!-- 팔로우 취소 -->
+	<delete id="deleteFollowId" parameterType="vo.FollowVO">
+		delete from followTest where id = #{id} and followid = #{followId}
+	</delete>
+	
+	<!-- 팔로우 -->
+	<insert id="insertFollowId" parameterType="vo.FollowVO">
+		insert into followTest values (#{id}, #{followId})
+	</insert>
+	
+	<select id="followingSelect" resultType="int">
+		select count(followId) from followTest where id = #{id}
+	</select>
+	
+	<select id="followerSelect" resultType="int">
+		select count(id) from followTest where followId = #{id}
+	</select>
+	
+	<!-- 팔로우 리스트 chat -->
+	<select id="followingList" resultType="vo.ProfileVO">
+		select b.*
+		from followTest a
+		inner join profileTest b
+		on a.followid = b.id
+		where a.id = #{id}
+	</select>
+	
+	<select id="followerList" resultType="vo.ProfileVO">
+		select b.*
+		from followTest a
+		inner join profileTest b
+		on a.id = b.id
+		where a.followid = #{id}
+	</select>
+</mapper>

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,5 +26,40 @@ public class ProfileDao implements IF_ProfileDao{
 	@Override
 	public int chk(String nickName) throws Exception {
 		return sql.selectOne(mapperQuery+".chk", nickName);
+	}
+	
+	//프로필 정보 불러오기
+	@Override
+	public ProfileVO select(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".select", id);
+	}
+	
+	//프로필 수정
+	@Override
+	public void update(ProfileVO pVO) throws Exception {
+		sql.update(mapperQuery+".update", pVO);
+	}
+
+	@Override
+	public String matchId(String id) throws Exception {
+		return sql.selectOne(mapperQuery+".matchId", id);
+	}
+
+	//아이디와 일치한 모든 프로필 불러오기
+	@Override
+	public List<ProfileVO> selectProfile(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectProfile", id);
+	}
+
+	//채팅 시 프로필 불러오기
+	@Override
+	public List<ProfileVO> profileList(List<String> nick) throws Exception {
+		return sql.selectList(mapperQuery+".profileList", nick);
+	}
+	// 모든 프로필 리스트 가져오기
+	@Override
+	public List<ProfileVO> allprofileList() throws Exception {
+		// TODO Auto-generated method stub
+		return sql.selectList(mapperQuery+".allprofileList");
 	}
 }

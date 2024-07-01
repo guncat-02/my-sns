@@ -27,18 +27,16 @@ public class SearchController {
 	public String search(Model model, HttpSession session) throws Exception {
 		model.addAttribute("id", String.valueOf(session.getAttribute("userid")));
 		List<String> keyWord = sServe.selectKeyWord();
-		List<Integer> results = pServe.selectPosts(keyWord);
 		model.addAttribute("keyWord", keyWord);
-		model.addAttribute("result", results);
+		model.addAttribute("result", pServe.selectPosts(keyWord));
 		return "search";
 	}
 	
-	
 	//searchList로 가기 위한 메서드
 	@GetMapping("searchList")
-	public String searChList(@ModelAttribute SearchVO sVO) throws Exception {
-		System.out.println(sVO.getKeyWord());
+	public String searChList(@ModelAttribute SearchVO sVO, HttpSession session, Model model) throws Exception {
 		sServe.insertKeyWord(sVO.getKeyWord());
+		model.addAttribute("id", String.valueOf(session.getAttribute("userid")));
 		return "searchList";
 	}
 }

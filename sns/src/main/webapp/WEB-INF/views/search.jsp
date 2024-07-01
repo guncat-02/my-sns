@@ -177,6 +177,8 @@
     	}
     })
     
+    
+    //트랜디 단어 클릭 시 이동
     $('.trendyWord').click(function() {
     	$('#search').val($(this).children('span').text());
     	$('form').submit();

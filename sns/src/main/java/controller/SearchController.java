@@ -1,6 +1,9 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -9,13 +12,13 @@ import vo.SearchVO;
 @Controller
 public class SearchController {
 	@GetMapping("search")
-	public String search() {
+	public String search(Model model, HttpSession session) {
+		model.addAttribute("id", String.valueOf(session.getAttribute("userid")));
 		return "search";
 	}
 	
 	@GetMapping("searchList")
 	public String searChList(@ModelAttribute SearchVO sVO) {
-		System.out.println(sVO.getKeyWord());
 		return "searchList";
 	}
 }

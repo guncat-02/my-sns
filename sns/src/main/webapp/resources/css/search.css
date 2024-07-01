@@ -37,11 +37,10 @@ body {
     flex-direction: column;
     border: 2px solid #ff00bf;
     border-radius: 15px;
-    width: 80%;
     height: fit-content;
+	width: 80%;
     border-radius: 15px;
     margin: 15px;
-    margin-left: 2%;
 }
 
 #search {
@@ -95,19 +94,11 @@ body {
 }
 
 #miniSearchTable {
-    width: 98%;
+    width: 95%;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
     font-size: 20px;
-}
-
-#miniSearchTable td {
-	border: 1px solid;
-}
-
-#miniSearchTable span {
-	border: 1px solid;
 }
 
 #miniSearchTable tr {
@@ -193,5 +184,9 @@ body {
 
 #searDel, .searListDel {
 	color: #00f7ff;
+	cursor: pointer;
+}
+
+.searListWord {
 	cursor: pointer;
 }

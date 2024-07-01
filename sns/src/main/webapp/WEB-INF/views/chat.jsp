@@ -327,6 +327,7 @@
     //채팅 초기화
     function resetChat() {
     	$('#nowChatting').empty();
+    	$('#chatImgList').empty();
     	$('#chattingText').val("");
     	$('#chatAttachBox').css("display", "none");
     	dataSave.items.clear();
@@ -384,9 +385,9 @@
     	$('.userInfo').eq(index).css('display', 'table');
     	for(let i = 0; i < users.length; i++) {
     		if(users[i].nickName == $('#user').val()) {
-    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; margin-left: 5%;'>"+users[i].nickName+"</span>");
     		} else {
-    			$('.userListDiv').eq(index).append("<span style='font-size: 15px;'>"+users[i].nickName+"</span>");
+    			$('.userListDiv').eq(index).append("<span style='font-size: 15px; margin-left: 5%;'>"+users[i].nickName+"</span>");
     		}
     	}   	
     }
@@ -455,6 +456,7 @@
     //채팅방 검색
     $('#chatSearch').keydown(function(e) {
     	if (e.keyCode == 13) {
+    		$('.userInfo').css('display', 'none')
     		let searWord = $('.infoName')
     		if($('#chatSearch').val().trim != "") {
     			$('.chatInfo').css('display', 'none')

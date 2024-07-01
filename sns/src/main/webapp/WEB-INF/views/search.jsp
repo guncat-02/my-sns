@@ -11,6 +11,8 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="./resources/JS/search.js"></script>
 <body class="theme">
     <div id="all">
         <div id="menuall">
@@ -55,17 +57,64 @@
     </div>
 </body>
 <script>
+	let searWord;
+
+	//trendy 단어 더보기
+    $('#plusTrendy').click(function() {
+        $('#plusTrendy').css('display', 'none');
+        $('#trendyDiv').css('overflow', 'inherit');
+    })
+
 	//검색 기록 추가
 	window.onload = function() {
-		if(localStorage.getItem('searWord') != null) {
-			$('#miniSearchTable').append("<tr><td class='searListWord' style='width: 90%'>"+localStorage.getItem('searWord')+"</td><td style='width: 10% text-align: right;'><span class='searListDel'>X</span></td></tr>")
+		if(localStorage.getItem('${id}') != null) {
+			searWord = localStorage.getItem('${id}')
+			searchList();
 		}	
+	}
+	
+	//검색 기록 띄우기
+	function searchList() {
+		$('#miniSearchTable').empty();
+		if(localStorage.getItem('${id}') != null) {
+			let myList = searWord.split('/');
+			for(let i = 0; i <myList.length; i++) {
+				$('#miniSearchTable').append("<tr><td class='searListWord' style='width: 90%'>"+myList[i]+"</td><td style='width: 10%; text-align: right;'><span class='searListDel'>X</span></td></tr>");	
+			}
+		} else {
+			$('#miniSearch').css('display', 'none');
+		}
 	}
 	
 	//검색어가 없을 경우 submit x
 	function searchSubmit() {
 		if($('#search').val().trim() != "" && $('#search').val() != null) {
-			localStorage.setItem('searWord', $('#search').val())
+			if(localStorage.getItem('${id}') != null) {
+				let myList = searWord.split('/');
+				let myWord;
+				for(let i = 0; i < myList.length; i++) {
+					if($('#search').val() == myList[i]) {
+						myWord = myList[i];
+						myList.splice(i, 1)
+						break;
+					}
+				}
+				if(myWord != null) {
+					searWord = "";
+					for(let i = 0; i < myList.length; i++) {
+						if(i == myList.length-1) {
+		        			searWord += myList[i]
+		        		} else {
+		        			searWord += myList[i]+"/"
+		        		}
+					}
+					localStorage.setItem('${id}', $('#search').val()+"/"+searWord)
+				} else {
+					localStorage.setItem('${id}', $('#search').val()+"/"+searWord)
+				}
+			} else {
+				localStorage.setItem('${id}', $('#search').val())
+			}
 			return true;
 		}
 		return false;
@@ -73,15 +122,45 @@
 	
 	//검색어 클릭 시 검색 기록 확인
 	$('#search').click(function() {
-		if(localStorage.getItem('searWord') != null) {
+		if(localStorage.getItem('${id}') != null) {
 			$('#miniSearch').css('display', 'block');	
 		}
 	})
-	
-	//trendy 단어 더보기
-    $('#plusTrendy').click(function() {
-        $('#plusTrendy').css('display', 'none');
-        $('#trendyDiv').css('overflow', 'inherit');
+    
+    //삭제 버튼 누를 시 값 삭제
+    $('#miniSearchTable').on('click', '.searListDel', function() {
+    	let index = $('.searListDel').index($(this))
+    	let word = searWord.split('/')
+    	word.splice(index, 1);
+    	searWord = "";
+    	if(word.length == 0) {
+    		localStorage.removeItem('${id}')
+    		searchList();
+    	} else {
+    		for(let i = 0; i < word.length; i++) {
+        		if(i == word.length-1) {
+        			searWord += word[i]
+        		} else {
+        			searWord += word[i]+"/"
+        		}
+        	}
+    		localStorage.setItem('${id}', searWord);
+    		searchList();
+    	}
     })
+    
+    //모두 지우기 버튼을 누를 시
+    $('#searDel').click(function() {
+    	searWord = "";
+    	localStorage.removeItem('${id}')
+		searchList();
+    })
+    
+    //검색어 누르면 자동으로 값 입력
+    $('#miniSearchTable').on('click', '.searListWord', function() {
+    	$('#search').val($(this).text());
+    	$('form').submit();
+    })
+    
 </script>
 </html>

@@ -11,8 +11,6 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="./resources/JS/search.js"></script>
 <body class="theme">
     <div id="all">
         <div id="menuall">
@@ -22,7 +20,7 @@
             <!--메인 컨텐츠는 여기에 작성 부탁합니당-->
             <form action="searchList" method="get" onsubmit="return searchSubmit()">
                 <div id="searchBar" class="theme">
-                    <input type="search" id="search" placeholder="SEARCH">
+                    <input type="search" id="search" placeholder="SEARCH" autocomplete='off'>
                     <div id="miniSearch">
                         <div id="miniSearchTitle">
                             <span id="searDel">모두 지우기</span>
@@ -162,5 +160,11 @@
     	$('form').submit();
     })
     
+	    //검색기록 안 보이게 만들기
+    $('#searchBar').mouseleave(function() {
+    	if($('#miniSearch').css('display') == 'block') {
+    		$('#miniSearch').css('display', 'none');
+    	}
+    })
 </script>
 </html>

@@ -20,7 +20,7 @@
             <!--메인 컨텐츠는 여기에 작성 부탁합니당-->
             <form action="searchList" method="get" onsubmit="return searchSubmit()">
                 <div id="searchBar" class="theme">
-                    <input type="search" id="search" placeholder="SEARCH" autocomplete='off'>
+                    <input type="search" id="search" placeholder="SEARCH" autocomplete='off' name="keyWord">
                     <div id="miniSearch">
                         <div id="miniSearchTitle">
                             <span id="searDel">모두 지우기</span>
@@ -37,14 +37,18 @@
             <div id="trendyDiv">
                 <div id="trendy">
                     <table id="trendyTable">
+                    <c:forEach var="key" items="${keyWord}" varStatus="st">
                         <tr>
-                            <td style="width: 90%;" class="trendyWord"><span>안녕</span><p>2000 posts</p></td>
+                            <td style="width: 90%;" class="trendyWord"><span style="color: #ff00bf;">${key}</span>
+                            <p>${result[st.index]} posts</p>
+                            </td>
                             <td style="width: 10%; text-align: right;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                                   </svg>
                             </td>
                         </tr>
+                        </c:forEach>
                     </table>
                 </div>
             </div>
@@ -98,15 +102,21 @@
 					}
 				}
 				if(myWord != null) {
-					searWord = "";
-					for(let i = 0; i < myList.length; i++) {
-						if(i == myList.length-1) {
-		        			searWord += myList[i]
-		        		} else {
-		        			searWord += myList[i]+"/"
-		        		}
+					if(myList.length == 0) {
+						localStorage.setItem('${id}', $('#search').val())
+					} else {
+						searWord = "";
+						for(let i = 0; i < myList.length; i++) {
+							if(myList[i] != null && myList[i].trim() != "") {
+								if(i == myList.length-1) {
+				        			searWord += myList[i]
+				        		} else {
+				        			searWord += myList[i]+"/"
+				        		}
+							}
+						}
+						localStorage.setItem('${id}', $('#search').val()+"/"+searWord)
 					}
-					localStorage.setItem('${id}', $('#search').val()+"/"+searWord)
 				} else {
 					localStorage.setItem('${id}', $('#search').val()+"/"+searWord)
 				}
@@ -160,11 +170,16 @@
     	$('form').submit();
     })
     
-	    //검색기록 안 보이게 만들기
+	//검색기록 안 보이게 만들기
     $('#searchBar').mouseleave(function() {
     	if($('#miniSearch').css('display') == 'block') {
     		$('#miniSearch').css('display', 'none');
     	}
+    })
+    
+    $('.trendyWord').click(function() {
+    	$('#search').val($(this).children('span').text());
+    	$('form').submit();
     })
 </script>
 </html>

@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,12 @@ public class SearchService implements IF_SearchService {
 	@Override
 	public void insertKeyWord(String keyWord) throws Exception {
 		sDao.insertKeyWord(keyWord);
+	}
+
+	//keyWord를 가져오기 위한 메서드
+	@Override
+	public List<String> selectKeyWord() throws Exception {
+		return sDao.selectKeyWord();
 	}
 
 }

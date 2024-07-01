@@ -54,4 +54,10 @@ public class PostingDao implements IF_PostingDao{
 		return sql.delete(mapperQuery+".deletePost", no);
 	}
 
+	//keyword에 해당하는 글 수 가져오기
+	@Override
+	public int selectPosts(String keyWord) throws Exception {
+		return sql.selectOne(mapperQuery+".selectPosts", keyWord);
+	}
+
 }

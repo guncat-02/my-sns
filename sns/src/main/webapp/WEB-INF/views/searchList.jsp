@@ -22,7 +22,7 @@
             <!--메인 컨텐츠는 여기에 작성 부탁합니당-->
             <form action="searchList" method="get" onsubmit="return searchSubmit()">
                 <div id="searchBar" class="theme">
-                    <input type="search" id="search" placeholder="SEARCH" autocomplete='off'>
+                    <input type="search" id="search" placeholder="SEARCH" autocomplete='off' name="keyWord">
                     <div id="miniSearch">
                         <div id="miniSearchTitle">
                             <span id="searDel">모두 지우기</span>

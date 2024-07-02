@@ -56,7 +56,8 @@ public class SearchController {
 		for(int i = 0; i < pVO.size(); i++) {
 			idList.add(pVO.get(i).getId());
 		}
-		List<ProfileVO> proVO = proServe.searchProfile(idList);
+		model.addAttribute("post", pVO);
+		model.addAttribute("profile", proServe.searchProfile(idList));
 		return "searchList";
 	}
 }

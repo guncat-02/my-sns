@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from profileTest where photo is not null
 </select>
 <select id="searchProfile" resultType="vo.ProfileVO" parameterType="java.util.List">
-	select nickNmae, photo from profileTest where p_main = 1 and id in
+	select nickName, photo from profileTest where p_main = 1 and id in
 	<foreach collection="list" item="item" separator="," open="(" close=")">
 		#{item}
 	</foreach>

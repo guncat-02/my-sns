@@ -1,7 +1,8 @@
 package controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import service.IF_PostingService;
 import service.IF_SearchService;
+import vo.PostVO;
 import vo.SearchVO;
 
 @Controller
@@ -35,8 +37,17 @@ public class SearchController {
 	//searchList로 가기 위한 메서드
 	@GetMapping("searchList")
 	public String searChList(@ModelAttribute SearchVO sVO, HttpSession session, Model model) throws Exception {
+		String id = String.valueOf(session.getAttribute("userid"));
 		sServe.insertKeyWord(sVO.getKeyWord());
-		model.addAttribute("id", String.valueOf(session.getAttribute("userid")));
+		model.addAttribute("id", id);
+		sVO.setKeyType("인기");
+		Map<String, Object> map = new HashMap<>();
+		map.put("key", sVO);
+		map.put("id", id);
+		List<PostVO> pVO = sServe.selectSearchList(map);
+		for(int i = 0; i < pVO.size(); i++) {
+			System.out.println(pVO.get(i).toString());
+		}
 		return "searchList";
 	}
 }

@@ -62,4 +62,9 @@ public class ProfileDao implements IF_ProfileDao{
 		// TODO Auto-generated method stub
 		return sql.selectList(mapperQuery+".allprofileList");
 	}
+
+	@Override
+	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
+		return sql.selectList(mapperQuery+".searchProfile", id);
+	}
 }

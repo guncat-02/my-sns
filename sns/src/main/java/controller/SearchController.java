@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import service.IF_PostingService;
+import service.IF_ProfileService;
 import service.IF_SearchService;
 import vo.PostVO;
+import vo.ProfileVO;
 import vo.SearchVO;
 
 @Controller
@@ -23,6 +26,8 @@ public class SearchController {
 	IF_SearchService sServe;
 	@Inject
 	IF_PostingService pServe;
+	@Inject
+	IF_ProfileService proServe;
 	
 	//search로 가기 위한 메서드
 	@GetMapping("search")
@@ -40,14 +45,18 @@ public class SearchController {
 		String id = String.valueOf(session.getAttribute("userid"));
 		sServe.insertKeyWord(sVO.getKeyWord());
 		model.addAttribute("id", id);
-		sVO.setKeyType("인기");
+		if(sVO.getKeyType() == null || sVO.getKeyType() == "") {
+			sVO.setKeyType("인기");
+		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("key", sVO);
 		map.put("id", id);
 		List<PostVO> pVO = sServe.selectSearchList(map);
+		List<String> idList = new ArrayList<>();
 		for(int i = 0; i < pVO.size(); i++) {
-			System.out.println(pVO.get(i).toString());
+			idList.add(pVO.get(i).getId());
 		}
+		List<ProfileVO> proVO = proServe.searchProfile(idList);
 		return "searchList";
 	}
 }

@@ -60,4 +60,9 @@ public class ProfileService implements IF_ProfileService{
 		// TODO Auto-generated method stub
 		return pDao.allprofileList();
 	}
+
+	@Override
+	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
+		return pDao.searchProfile(id);
+	}
 }

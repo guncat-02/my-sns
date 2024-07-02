@@ -18,4 +18,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) b 
 		where rs between 1 and 10	 
 	</select>
+	<select id="selectSearchList" resultType="vo.PostVO">
+		select c.*, d.re_cnt, nvl(c.show, 0)+nvl(c.p_love, 0)+nvl(d.re_cnt, 0) as cnt
+		from (
+			select a.*, b.p_love, b.commCnt 
+			from  (
+				select * 
+				from postTest 
+				where cont like '%하%' and id = 'nuit0204' and privacy = 1
+			) a left outer join (
+				select dd.*, bb.commCnt 
+				from (
+					select no,  count(no) as p_love 
+					from p_loveTest 
+					group by no
+				) dd
+				full outer join (
+					select count(no) as commCnt, no 
+					from commTest 
+					group by no
+				) bb
+				on dd.no = bb.no
+				where dd.no is not null and bb.no is not null
+			) b on a.no = b.no
+		) c
+		left outer join (
+			select count(re_no) as re_cnt, re_no 
+			from postTest 
+			group by re_no
+		) d
+		on c.no = d.re_no
+		order by cnt desc;
+	</select>
 </mapper>

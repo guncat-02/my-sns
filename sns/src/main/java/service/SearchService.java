@@ -38,6 +38,6 @@ public class SearchService implements IF_SearchService {
 			List<String> file = mDao.postAttach(p.getNo());
 			p.setFilename(file.toArray(new String[file.size()]));
 		}
-		return sDao.selectSearchList(map);
+		return pVO;
 	}
 }

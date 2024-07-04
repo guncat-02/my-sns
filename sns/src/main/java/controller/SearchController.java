@@ -42,8 +42,10 @@ public class SearchController {
 	//searchList로 가기 위한 메서드
 	@GetMapping("searchList")
 	public String searChList(@ModelAttribute SearchVO sVO, HttpSession session, Model model) throws Exception {
+		System.out.println("넘어옴");
 		String id = String.valueOf(session.getAttribute("userid"));
 		sServe.insertKeyWord(sVO.getKeyWord());
+		model.addAttribute("keyWord", sVO.getKeyWord());
 		model.addAttribute("id", id);
 		if(sVO.getKeyType() == null || sVO.getKeyType() == "") {
 			sVO.setKeyType("인기");
@@ -52,12 +54,16 @@ public class SearchController {
 		map.put("key", sVO);
 		map.put("id", id);
 		List<PostVO> pVO = sServe.selectSearchList(map);
-		List<String> idList = new ArrayList<>();
-		for(int i = 0; i < pVO.size(); i++) {
-			idList.add(pVO.get(i).getId());
+		if(pVO != null && pVO.size() != 0) {
+			List<String> idList = new ArrayList<>();
+			for(int i = 0; i < pVO.size(); i++) {
+				System.out.println(pVO.get(i).toString());
+				idList.add(pVO.get(i).getId());
+			}
+			List<ProfileVO> ppVO = proServe.searchProfile(idList);
+			model.addAttribute("post", pVO);
+			model.addAttribute("profile", ppVO);
 		}
-		model.addAttribute("post", pVO);
-		model.addAttribute("profile", proServe.searchProfile(idList));
 		return "searchList";
 	}
 }

@@ -451,7 +451,10 @@
     $('.keyType').click(function() {
     	let word = $('#search').val();
     	let type = $(this).text();
+    	const index = $('.keyType').index($(this))
     	$('#searResult').load(`searchList?keyWord=\${word}&keyType=\${type} #searchResultAll`)
+    	$('.keyType').removeAttr("id");
+    	$('.keyType').eq(index).attr("id", "nowKeyType")
     })
 </script>
 </html>

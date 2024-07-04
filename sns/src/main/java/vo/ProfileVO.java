@@ -1,12 +1,6 @@
 package vo;
 
 public class ProfileVO {
-	@Override
-	public String toString() {
-		return "ProfileVO [id=" + id + ", nickName=" + nickName + ", photo=" + photo + ", tel=" + tel + ", bio=" + bio
-				+ ", privacy=" + privacy + ", p_main=" + p_main + ", email=" + email + "]";
-	}
-
 	private String id; //아이디
 	private String nickName; //닉네임
 	private String photo; //프로필 사진

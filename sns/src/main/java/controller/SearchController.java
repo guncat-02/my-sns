@@ -57,7 +57,6 @@ public class SearchController {
 		if(pVO != null && pVO.size() != 0) {
 			List<String> idList = new ArrayList<>();
 			for(int i = 0; i < pVO.size(); i++) {
-				System.out.println(pVO.get(i).toString());
 				idList.add(pVO.get(i).getId());
 			}
 			List<ProfileVO> ppVO = proServe.searchProfile(idList);

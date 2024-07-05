@@ -61,8 +61,15 @@ public class ProfileService implements IF_ProfileService{
 		return pDao.allprofileList();
 	}
 
+	//검색 결과 글 프로필
 	@Override
 	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
 		return pDao.searchProfile(id);
+	}
+
+	//사용자 검색 결과
+	@Override
+	public List<ProfileVO> searchUser(String keyWord) throws Exception {
+		return pDao.searchUser(keyWord);
 	}
 }

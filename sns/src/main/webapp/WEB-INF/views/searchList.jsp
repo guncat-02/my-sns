@@ -50,9 +50,11 @@
 			<div id="searResult">
 				<div id="searchResultAll">
 				<c:choose>
-					<c:when test="${post ne null}">
+					<c:when test="${info ne null}">
 						<div id="searMain">
-							<c:forEach items="${post}" var="mp">
+							<c:choose>
+							<c:when test='${key.keyType ne "사용자"}'>
+								<c:forEach items="${info}" var="mp">
 								<c:set var="filenameLength" value="${fn:length(mp.filename)}" />
 								<div class="p_inf">
 									<a href="userprofile?id=${mp.id}" class="userprofilealink">
@@ -204,9 +206,59 @@
 									</div>
 								</div>
 							</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${info}" var="user">
+								<div id="searchResultUser">
+                					<div class="searUser" style="grid-column: 1 / 2; grid-row: 1 / 3;">
+                    					<div class="userPhotoCircle">
+                    						<c:choose>
+                    							<c:when test="${user.photo eq null}">
+                    								<img class="userPhoto" src="./resources/img/프로필.png">
+                    							</c:when>
+                        						<c:when test="${user.photo ne null}">
+                        							<img class="userPhoto" src="download?filename=${user.photo}">
+                    							</c:when>
+                        					</c:choose>
+                    					</div>
+                					</div>
+                					<c:choose>
+                				<c:when test="${user.bio ne null}">
+                				<div class="searUser" style="grid-column: 2 / 3; grid-row: 1 / 2;">
+                    				<span class="userNick">
+                        				${user.nickName}
+                    				</span>
+                    				<span class="userId">
+                        				( ${user.id} )
+                    				</span>
+                				</div>
+               					 <div class="searUser" style="grid-column: 2 / 3; grid-row: 2 / 3;">
+                    				<span class="userBio">
+                        				${user.bio}
+                    				</span>
+                				</div>
+                				</c:when>
+                				<c:when test="${user.bio eq null}">
+                					<div class="searUser" style="grid-column: 2 / 3; grid-row: 1 / 3; padding-top: 4%;">
+                    				<span class="userNick">
+                        				${user.nickName}
+                    				</span>
+                    				<span class="userId">
+                        				( ${user.id} )
+                    				</span>
+                					</div>
+                				</c:when>
+                				</c:choose>
+                				<div class="searUser" style="grid-column: 3 / 4; grid-row: 1 / 3;">
+                    
+                				</div>
+           					</div>
+           					</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</c:when>
-					<c:when test="${post eq null}">
+					<c:when test="${info eq null}">
 						<div id="searchNone">
 							<span>검색 결과가 존재 하지 않습니다.</span>
 						</div>
@@ -222,7 +274,7 @@
 
 	//검색 기록 추가
 	window.onload = function() {
-		$('#search').val('${keyWord}')
+		$('#search').val('${key.keyWord}')
 		if(localStorage.getItem('${id}') != null) {
 			searWord = localStorage.getItem('${id}')
 			searchList();

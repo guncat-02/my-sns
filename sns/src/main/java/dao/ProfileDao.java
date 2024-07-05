@@ -63,8 +63,15 @@ public class ProfileDao implements IF_ProfileDao{
 		return sql.selectList(mapperQuery+".allprofileList");
 	}
 
+	//검색 결과 글 프로필
 	@Override
 	public List<ProfileVO> searchProfile(List<String> id) throws Exception {
 		return sql.selectList(mapperQuery+".searchProfile", id);
+	}
+
+	//검색 결과 사용자
+	@Override
+	public List<ProfileVO> searchUser(String keyWord) throws Exception {
+		return sql.selectList(mapperQuery+".searchUser", keyWord);
 	}
 }

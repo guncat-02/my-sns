@@ -49,10 +49,9 @@
 
 #searResult {
     width: 95%;
-    height: 60px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 150px
+    margin-top: 180px;
 }
 
 #searchNone {
@@ -63,4 +62,46 @@
     display: block;
     font-size: 20px;
     margin-top: 180px;
+}
+
+#searchResultUser {
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 15% 65% 20%;
+    grid-template-rows: 60% 40%;
+    margin-bottom: 30px;
+}
+
+.userPhotoCircle {
+    border: 2px solid #ff00bf;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+}
+
+.userPhoto {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.userNick {
+    font-size: 40px;
+}
+
+.searUser:nth-child(2), .searUser:nth-child(3) {
+    padding-left: 2%;
+}
+
+.searUser:nth-child(3) {
+    padding-top: 1%;
+}
+
+.userId, .userBio {
+    font-size: 18px;
 }

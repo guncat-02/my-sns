@@ -42,26 +42,32 @@ public class SearchController {
 	//searchList로 가기 위한 메서드
 	@GetMapping("searchList")
 	public String searChList(@ModelAttribute SearchVO sVO, HttpSession session, Model model) throws Exception {
-		System.out.println("넘어옴");
 		String id = String.valueOf(session.getAttribute("userid"));
 		sServe.insertKeyWord(sVO.getKeyWord());
-		model.addAttribute("keyWord", sVO.getKeyWord());
+		model.addAttribute("key", sVO);
 		model.addAttribute("id", id);
-		if(sVO.getKeyType() == null || sVO.getKeyType() == "") {
+		if(sVO.getKeyType() == null || sVO.getKeyType().trim().equals("")) {
 			sVO.setKeyType("인기");
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("key", sVO);
 		map.put("id", id);
-		List<PostVO> pVO = sServe.selectSearchList(map);
-		if(pVO != null && pVO.size() != 0) {
-			List<String> idList = new ArrayList<>();
-			for(int i = 0; i < pVO.size(); i++) {
-				idList.add(pVO.get(i).getId());
+		if(!sVO.getKeyType().equals("사용자")) {
+			List<PostVO> pVO = sServe.selectSearchList(map);
+			if(pVO != null && pVO.size() != 0) {
+				List<String> idList = new ArrayList<>();
+				for(int i = 0; i < pVO.size(); i++) {
+					idList.add(pVO.get(i).getId());
+				}
+				List<ProfileVO> ppVO = proServe.searchProfile(idList);
+				model.addAttribute("info", pVO);
+				model.addAttribute("profile", ppVO);
 			}
-			List<ProfileVO> ppVO = proServe.searchProfile(idList);
-			model.addAttribute("post", pVO);
-			model.addAttribute("profile", ppVO);
+		} else {
+			List<ProfileVO> proVO = proServe.searchUser(sVO.getKeyWord());
+			if(proVO != null && proVO.size() != 0) {
+				model.addAttribute("info", proVO);
+			}
 		}
 		return "searchList";
 	}

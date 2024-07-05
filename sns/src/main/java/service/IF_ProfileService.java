@@ -15,4 +15,5 @@ public interface IF_ProfileService {
 	// 모든 프로필 리스트 가져오기
 	public List<ProfileVO> allprofileList() throws Exception;
 	public List<ProfileVO> searchProfile(List<String> id) throws Exception;
+	public List<ProfileVO> searchUser(String keyWord) throws Exception;
 }

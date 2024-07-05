@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="./resources/css/userProfile.css">
     <link rel="stylesheet" href="./resources/css/profileShow.css">
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
 <body class="theme">
     <input type="hidden" value="${profile.photo}" id="photo">
     <div id="back" class="theme">
-        <span id="backBtn"><a href="main">&lang;</a></span>
+        <span id="backBtn">&lang;</span>
         <div id="myProInfo">
             <span id="myNick">${profile.nickName}</span>
             <span class="myDetail">( </span>
@@ -201,8 +205,18 @@
 </body>
 
 <script>
+	let back;
+	let keyWord;
+
 	//프로필 불러오기
 	window.onload = function() {
+		const backHref = document.referrer;
+    	const backArray = backHref.split('?')
+    	const backChk = backArray[0].split('/')
+    	const backWord = backArray[1].split('=')
+    	keyWord = backWord[1];
+    	back = backChk[backChk.length-1];
+    	
     	const img = document.querySelector('.proImg');
     	const photo = document.querySelector('#photo');
     	if(photo.value != "" && photo.value != null) {
@@ -238,5 +252,21 @@
 				}
 		 })  
 	}
+    
+    //뒤로가기 버튼 구현
+    $('#backBtn').click(function() {
+    	const loc = window.location.href;
+    	const locArray = loc.split('?');
+    	const locChk = locArray[0].split('/');
+    	if(locChk[locChk.length-1] == back) {
+    		location.href = "main"
+    	} else {
+    		if(back == "searchList") {
+    			location.href = back+"?"+word;
+    		} else {
+    			location.href = back;	
+    		}
+    	}
+    })
 </script>
 </html>

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -69,7 +70,7 @@ public class ProfileService implements IF_ProfileService{
 
 	//사용자 검색 결과
 	@Override
-	public List<ProfileVO> searchUser(String keyWord) throws Exception {
-		return pDao.searchUser(keyWord);
+	public List<ProfileVO> searchUser(Map map) throws Exception {
+		return pDao.searchUser(map);
 	}
 }

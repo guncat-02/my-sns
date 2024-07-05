@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{item}
 	</foreach>
 </select>
-<select id="searchUser" resultType="vo.ProfileVO" parameterType="String">
-	select * from profileTest where (privacy = 1 and p_main = 1) and (id like '%'||#{keyWord}||'%' or nickName like '%'||#{keyWord}||'%')
+<select id="searchUser" resultType="vo.ProfileVO" parameterType="hashmap">
+	select * from profileTest where (privacy = 1 and p_main = 1 and id != #{id}) and (id like '%'||#{key.keyWord}||'%' or nickName like '%'||#{key.keyWord}||'%')
 </select>
 </mapper>

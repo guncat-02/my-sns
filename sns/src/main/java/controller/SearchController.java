@@ -64,7 +64,7 @@ public class SearchController {
 				model.addAttribute("profile", ppVO);
 			}
 		} else {
-			List<ProfileVO> proVO = proServe.searchUser(sVO.getKeyWord());
+			List<ProfileVO> proVO = proServe.searchUser(map);
 			if(proVO != null && proVO.size() != 0) {
 				model.addAttribute("info", proVO);
 			}

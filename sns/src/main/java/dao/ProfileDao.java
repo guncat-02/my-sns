@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -71,7 +72,7 @@ public class ProfileDao implements IF_ProfileDao{
 
 	//검색 결과 사용자
 	@Override
-	public List<ProfileVO> searchUser(String keyWord) throws Exception {
-		return sql.selectList(mapperQuery+".searchUser", keyWord);
+	public List<ProfileVO> searchUser(Map map) throws Exception {
+		return sql.selectList(mapperQuery+".searchUser", map);
 	}
 }

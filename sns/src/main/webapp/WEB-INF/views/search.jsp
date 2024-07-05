@@ -72,7 +72,10 @@
 		if(localStorage.getItem('${id}') != null) {
 			searWord = localStorage.getItem('${id}')
 			searchList();
-		}	
+		}
+		if($('#trendyTable tr').length <= 5) {
+			$('#plusTrendy').css('display', 'none');
+		}
 	}
 	
 	//검색 기록 띄우기

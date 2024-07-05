@@ -64,7 +64,7 @@
     margin-top: 180px;
 }
 
-#searchResultUser {
+.searchResultUser {
     height: 100px;
     margin-left: auto;
     margin-right: auto;
@@ -94,14 +94,18 @@
     font-size: 40px;
 }
 
-.searUser:nth-child(2), .searUser:nth-child(3) {
+.userNick, .userBio {
     padding-left: 2%;
 }
 
-.searUser:nth-child(3) {
+.userBio {
     padding-top: 1%;
 }
 
 .userId, .userBio {
     font-size: 18px;
+}
+
+.searUser {
+	cursor: pointer;
 }

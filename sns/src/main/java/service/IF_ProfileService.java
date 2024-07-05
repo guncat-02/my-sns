@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import vo.ProfileVO;
 
@@ -15,5 +16,5 @@ public interface IF_ProfileService {
 	// 모든 프로필 리스트 가져오기
 	public List<ProfileVO> allprofileList() throws Exception;
 	public List<ProfileVO> searchProfile(List<String> id) throws Exception;
-	public List<ProfileVO> searchUser(String keyWord) throws Exception;
+	public List<ProfileVO> searchUser(Map map) throws Exception;
 }

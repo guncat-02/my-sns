@@ -209,7 +209,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${info}" var="user">
-								<div id="searchResultUser">
+								<div class="searchResultUser">
                 					<div class="searUser" style="grid-column: 1 / 2; grid-row: 1 / 3;">
                     					<div class="userPhotoCircle">
                     						<c:choose>
@@ -249,7 +249,7 @@
                 					</div>
                 				</c:when>
                 				</c:choose>
-                				<div class="searUser" style="grid-column: 3 / 4; grid-row: 1 / 3;">
+                				<div class="userFollowBtn" style="grid-column: 3 / 4; grid-row: 1 / 3;">
                     
                 				</div>
            					</div>
@@ -507,6 +507,11 @@
     	$('#searResult').load(`searchList?keyWord=\${word}&keyType=\${type} #searchResultAll`)
     	$('.keyType').removeAttr("id");
     	$('.keyType').eq(index).attr("id", "nowKeyType")
+    })
+    
+    //프로필 이동
+    $('#searResult').on('click', '.searUser', function() {
+    	location.href = "profileShow?id="+$('.searUser').closest('.searchResultUser').find('span').eq(1).text().trim().split(" ")[1];
     })
 </script>
 </html>

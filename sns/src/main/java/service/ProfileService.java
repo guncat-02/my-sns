@@ -73,4 +73,10 @@ public class ProfileService implements IF_ProfileService{
 	public List<ProfileVO> searchUser(Map map) throws Exception {
 		return pDao.searchUser(map);
 	}
+
+	//서브 프로필 추가
+	@Override
+	public void insertProfile(ProfileVO pVO) throws Exception {
+		pDao.insertProfile(pVO);
+	}
 }

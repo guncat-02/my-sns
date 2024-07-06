@@ -23,6 +23,7 @@
             <span>MY M PROFILE</span>
         </div>
         <div id="profileList">
+        	<div id="profileListAll">
             <div id="mainProfile">
             	<c:forEach var="p" items="${profile}">
                 	<c:if test="${p.p_main == 1}">
@@ -90,22 +91,24 @@
                         </div>
                         <div id="userFormImg">
                             <div id="userFormCircle">
-                                <label for="userFormFile" id="userLabel"><img src="./img/프로필.png" id="userFormPhoto"></label>
+                                <label for="userFormFile" id="userLabel"><img src="./resources/img/프로필.png" id="userFormPhoto"></label>
                                 <input type="file" id="userFormFile" name="proPhoto">
                             </div>
                         </div>
                         <div id="userFormInfo">
                             <span>NICK NAME</span>
                             <div id="formNickAll">
-                                <input type="text" id="formNick" name="nickName" class="formText">
+                                <input type="text" id="formNick" name="nickName" class="formText" minlength="1" maxlength="8" pattern="^[ㄱ-ㅎ가-힣a-zA-Z\d_]+$" title="한글, 영어, 숫자, 언더바만 사용 가능합니다.">
                                 <input type="button" id="formChk" value="CHECK">
                             </div>
                             <span>BIO</span>
-                            <input type="text" id="formBio" name="bio" class="formText">
+                            <input type="text" id="formBio" name="bio" class="formText" maxlength="50" placeholder="50자 까지 입력 가능합니다.">
                         </div>
-                        <input type="button" value="CREATE >" id="createProfile">
+                        <input type="button" value="REMOVE IMG" id="baseImg">
                     </form>
                 </div>
+            </div>
+            <input type="button" value="CREATE" id="createProfile">
             </div>
         </div>
         <div id="ProfileInfo">
@@ -122,15 +125,85 @@
     }
 
     //프로필 생성 창 띄우기
-    $('#userPlus').click(function() {
+    $('#chatAll').on('click', '#userPlus', function() {
         $('#userPlus').css('display', 'none');
         $('#userForm').css('display', 'block');
+        $('#createProfile').css('display', 'block');
     })
 
     //프로필 생성 창 닫기
-    $('#cancleBtn').click(function() {
+    $('#chatAll').on('click', '#cancleBtn', function() {
         $('#userForm').css('display', 'none');
+        $('#userForm').load("profileList #proForm")
         $('#userPlus').css('display', 'flex');
+        $('#createProfile').css('display', 'none');
+    })
+    
+    //닉네임 중복 체크
+    $('#chatAll').on('click', '#formChk', function() {
+    	if($('#formNick').val().trim() != "" && $('#formNick').val() != null) {
+    		$.ajax({
+        		url: "profileChk",
+        		type: "post",
+        		data: {nickName: $('#formNick').val()},
+            	success: function(result) {
+            		if(result != "null") {
+            			alert('사용 가능한 NICK NAME입니다.');
+                		$('#formChk').css('color', '#ff00bf');	
+            		} else {
+            			alert('중복된 NICK NAME 입니다.');
+            		}
+            	}
+        	})
+    	} else {
+    		alert('NICK NAME 은 필수 입력입니다.')	
+    	}
+    })
+    
+    //닉네임 다시 입력 시 중복체크 풀기
+    $('#chatAll').on('change', '#formNick', function() {
+    	$('#formChk').css('color', '#00f7ff');
+    })
+    
+    //submit
+    $('#chatAll').on('click', '#createProfile', function() {
+    	console.log($('#formChk').css('color'))
+    	if($('#formChk').css('color') == 'rgb(255, 0, 191)') {
+    		const form = $('form')[0];
+        	const formData = new FormData(form);
+        	$.ajax({
+        		url: "insertProfile",
+        		type: "post",
+        		data: formData,
+        		enctype: "multipart/form_data",
+        		processData: false,
+            	contentType: false,
+            	async: false
+        	})
+        	$('#profileList').load("profileList #profileListAll")
+    	} else {
+    		alert('중복 체크를 해주세요.')
+    	}
+    })
+    
+    //img 미리보기
+    $('#chatAll').on('change', '#userFormFile', function() {
+    	const file = document.querySelector('#userFormFile')
+        const img = document.querySelector('#userFormPhoto')
+    	$('#baseImg').css('display', 'block')
+        const reader = new FileReader();
+        reader.readAsDataURL(file.files[0]);
+        reader.onload = function() {
+            img.src = reader.result;
+        }
+    })
+    
+    //기본 프로필로 변경
+   $('#chatAll').on('click', '#baseImg', function() {
+	   	const img = document.querySelector('#userFormPhoto')
+    	$('#userFormFile').val('')
+    	img.src = "./resources/img/프로필.png";
+    	$('#baseImg').css('display', 'none')
     })
 </script>
 </html>

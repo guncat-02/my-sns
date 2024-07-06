@@ -17,4 +17,5 @@ public interface IF_ProfileService {
 	public List<ProfileVO> allprofileList() throws Exception;
 	public List<ProfileVO> searchProfile(List<String> id) throws Exception;
 	public List<ProfileVO> searchUser(Map map) throws Exception;
+	public void insertProfile(ProfileVO pVO) throws Exception;
 }

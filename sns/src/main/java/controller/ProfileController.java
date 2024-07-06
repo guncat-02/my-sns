@@ -263,4 +263,14 @@ public class ProfileController {
 		return "userProfile";
 	}
 	
+	//서브 프로필 추가
+	@PostMapping("insertProfile")
+	public void insertProfile(@ModelAttribute ProfileVO pVO, HttpSession session, MultipartFile[] proPhoto) throws Exception {
+		String file = upload.fileUpload(proPhoto)[0];
+		if(file != null) {
+			pVO.setPhoto(file);
+		}
+		pVO.setId(String.valueOf(session.getAttribute("userid")));
+		pServe.insertProfile(pVO);
+	}
 }

@@ -40,4 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="searchUser" resultType="vo.ProfileVO" parameterType="hashmap">
 	select * from profileTest where (privacy = 1 and p_main = 1 and id != #{id}) and (id like '%'||#{key.keyWord}||'%' or nickName like '%'||#{key.keyWord}||'%')
 </select>
+<insert id="insertProfile" parameterType="vo.ProfileVO">
+	insert into profileTest values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, 0, 0)
+</insert>
 </mapper>

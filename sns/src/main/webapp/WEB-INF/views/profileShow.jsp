@@ -17,7 +17,7 @@
 <body class="theme">
 	<input type="hidden" value="${profile.photo}" id="photo">
 	<div id="back" class="theme">
-		<span id="backBtn">&lang;</span>
+		<span id="backBtn"><a href="main">&lang;</a></span>
 		<div id="myProInfo">
 			<span id="myNick">${profile.nickName}</span> <span class="myDetail">( </span> <span id="myId" class="myDetail">${profile.id}</span> <span class="myDetail"> )</span>
 		</div>
@@ -223,18 +223,8 @@
         }
     })
     
-    let back;
-    let keyWord;
-    
     //프로필 불러오기
     window.onload = function() {
-    	const backHref = document.referrer;
-    	const backArray = backHref.split('?')
-    	const backChk = backArray[0].split('/')
-    	const backWord = backArray[1].split('=')
-    	keyWord = backWord[1];
-    	back = backChk[backChk.length-1];
-    	
         const img = document.querySelector('.proImg');
         const photo = document.querySelector('#photo');
   
@@ -268,21 +258,5 @@
 				}
 		 })  
 	}
-     
-    //뒤로가기 버튼 구현
-    $('#backBtn').click(function() {
-    	const loc = window.location.href;
-    	const locArray = loc.split('?');
-    	const locChk = locArray[0].split('/');
-    	if(locChk[locChk.length-1] == back) {
-    		location.href = "main"
-    	} else {
-    		if(back == "searchList") {
-    			location.href = back+"?keyWord="++word;
-    		} else {
-    			location.href = back;	
-    		}
-    	}
-    })
 </script>
 </html>

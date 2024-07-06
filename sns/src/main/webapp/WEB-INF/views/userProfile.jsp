@@ -262,7 +262,7 @@
     		location.href = "main"
     	} else {
     		if(back == "searchList") {
-    			location.href = back+"?keyWord="+word;
+    			location.href = back+"?keyWord="+keyWord;
     		} else {
     			location.href = back;	
     		}

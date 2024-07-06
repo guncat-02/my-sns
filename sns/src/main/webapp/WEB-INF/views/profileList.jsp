@@ -83,6 +83,29 @@
                         <span>M PROFILE</span>
                     </div>
                 </div>
+                <div id="userForm">
+                    <form id="proForm">
+                        <div id="cancleForm">
+                            <input type="button" value="x" id="cancleBtn">
+                        </div>
+                        <div id="userFormImg">
+                            <div id="userFormCircle">
+                                <label for="userFormFile" id="userLabel"><img src="./img/프로필.png" id="userFormPhoto"></label>
+                                <input type="file" id="userFormFile" name="proPhoto">
+                            </div>
+                        </div>
+                        <div id="userFormInfo">
+                            <span>NICK NAME</span>
+                            <div id="formNickAll">
+                                <input type="text" id="formNick" name="nickName" class="formText">
+                                <input type="button" id="formChk" value="CHECK">
+                            </div>
+                            <span>BIO</span>
+                            <input type="text" id="formBio" name="bio" class="formText">
+                        </div>
+                        <input type="button" value="CREATE >" id="createProfile">
+                    </form>
+                </div>
             </div>
         </div>
         <div id="ProfileInfo">
@@ -97,7 +120,17 @@
             $('#userPlus').css('display', 'none');
         }
     }
-    
-    //프로필 추가하기
+
+    //프로필 생성 창 띄우기
+    $('#userPlus').click(function() {
+        $('#userPlus').css('display', 'none');
+        $('#userForm').css('display', 'block');
+    })
+
+    //프로필 생성 창 닫기
+    $('#cancleBtn').click(function() {
+        $('#userForm').css('display', 'none');
+        $('#userPlus').css('display', 'flex');
+    })
 </script>
 </html>

@@ -48,13 +48,13 @@ body {
     color: inherit;
 }
 
-#newProfile {
+#profileList {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     display: flex;
 }
 
-#newProfileTitle {
+#profileListTitle {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     border-bottom: 1px solid #00f7ff;
@@ -62,12 +62,12 @@ body {
     padding-top: 1%;
 }
 
-#newProfileTitle span {
+#profileListTitle span {
     font-size: 38px;
     color: #00f7ff;
 }
 
-#newProfileInfo {
+#ProfileInfo {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     border-top: 1px solid #00f7ff;
@@ -75,12 +75,12 @@ body {
     padding-top: 1%;
 }
 
-#newProfileInfo span {
+#ProfileInfo span {
     font-size: 20px;
     color: #00f7ff;
 }
 
-#newProfileInfo p {
+#ProfileInfo p {
     font-size: 13px;
     margin-top: 0px;
     color: #ff00bf;
@@ -142,7 +142,7 @@ body {
     justify-content: space-between;
 }
 
-.userProfilePhoto, #userPlusCircleCircle {
+.userProfilePhoto, #userPlusCircle {
     width: 200px;
 }
 
@@ -156,7 +156,7 @@ body {
     margin-top: 20px;
 }
 
-#userPlusCircleCircle svg {
+#userPlusCircle svg {
     width: 150px;
     height: 150px;
     margin-left: auto;

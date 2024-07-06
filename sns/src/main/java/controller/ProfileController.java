@@ -262,4 +262,5 @@ public class ProfileController {
 		model.addAttribute("mypostList",mypostList);
 		return "userProfile";
 	}
+	
 }

@@ -117,4 +117,11 @@ public class ChatController {
 		model.addAttribute("profile", pro);
 		return "profileList";
 	}
+	
+	//채팅 프로필 수정
+	@GetMapping("profileUpdate")
+	public String profileUpdate(HttpSession session, Model model) throws Exception {
+		model.addAttribute("profile", pServe.selectSub(String.valueOf(session.getAttribute("userid"))));
+		return "profileUpdate";
+	}
 }

@@ -43,4 +43,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="insertProfile" parameterType="vo.ProfileVO">
 	insert into profileTest values(#{id}, #{nickName}, #{photo, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{bio, jdbcType=VARCHAR}, 0, 0)
 </insert>
+<select id="selectSub" parameterType="String" resultType="vo.ProfileVO">
+	select * from profileTest where p_main = 0 and id = #{id}
+</select>
+<update id="edit" parameterType="hashmap">
+	update profileTest set nickName = #{nickName], 
+	<choose>
+		<when test='{photo.equals("REMOVE IMG")}'></when>
+	</choose>
+	photo = #{photo, jdbcType=VARCHAR}, bio = #{bio, jdbcType=VARCHAR} where nickName = #{nickName}
+</update>
 </mapper>

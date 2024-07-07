@@ -81,4 +81,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public void insertProfile(ProfileVO pVO) throws Exception {
 		sql.insert(mapperQuery+".insertProfile", pVO);
 	}
+
+	//서브 프로필 가져오기
+	@Override
+	public List<ProfileVO> selectSub(String id) throws Exception {
+		return sql.selectList(mapperQuery+".selectSub", id);
+	}
 }

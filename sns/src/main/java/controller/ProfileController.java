@@ -273,4 +273,17 @@ public class ProfileController {
 		pVO.setId(String.valueOf(session.getAttribute("userid")));
 		pServe.insertProfile(pVO);
 	}
+	
+	//서브 프로필 수정
+	@PostMapping("edit")
+	public String eidt(@ModelAttribute ProfileVO pVO, MultipartFile[] proPhoto, @RequestParam("imgChk") String chk) throws Exception {
+		String file = upload.fileUpload(proPhoto)[0];
+		
+		if(file != null) {
+			pVO.setPhoto(file);
+		} else {
+			pVO.setPhoto(chk);
+		}
+		return "redirect:profileList";
+	}
 }

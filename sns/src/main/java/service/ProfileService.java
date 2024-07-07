@@ -79,4 +79,10 @@ public class ProfileService implements IF_ProfileService{
 	public void insertProfile(ProfileVO pVO) throws Exception {
 		pDao.insertProfile(pVO);
 	}
+
+	//서브 프로필 가져오기
+	@Override
+	public List<ProfileVO> selectSub(String id) throws Exception {
+		return pDao.selectSub(id);
+	}
 }

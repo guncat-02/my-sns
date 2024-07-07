@@ -21,7 +21,7 @@
                     <a href="profileList">PROFILE</a>
                     <ul id="profileSubDiv">
                         <li class="proSubMenu"><a href="profileList">SHOW</a></li>
-                        <li class="proSubMenu">EDIT</li>
+                        <li class="proSubMenu"><a href="profileUpdate">EDIT</a></li>
                         <li class="proSubMenu">DELETE</li>
                     </ul>
                 </li>
@@ -94,6 +94,7 @@
                 </div>
                 <div id="userForm">
                     <form id="proForm">
+                    	<input type="hidden" id="userNick" >
                         <div id="cancleForm">
                             <input type="button" value="x" id="cancleBtn">
                         </div>

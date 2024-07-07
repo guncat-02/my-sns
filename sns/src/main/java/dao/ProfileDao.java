@@ -87,4 +87,10 @@ public class ProfileDao implements IF_ProfileDao{
 	public List<ProfileVO> selectSub(String id) throws Exception {
 		return sql.selectList(mapperQuery+".selectSub", id);
 	}
+
+	//서브 프로필 수정
+	@Override
+	public void edit(Map map) throws Exception {
+		sql.update(mapperQuery+".edit", map);
+	}
 }

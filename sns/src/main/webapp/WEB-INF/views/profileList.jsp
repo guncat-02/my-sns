@@ -94,7 +94,6 @@
                 </div>
                 <div id="userForm">
                     <form id="proForm">
-                    	<input type="hidden" id="userNick" >
                         <div id="cancleForm">
                             <input type="button" value="x" id="cancleBtn">
                         </div>

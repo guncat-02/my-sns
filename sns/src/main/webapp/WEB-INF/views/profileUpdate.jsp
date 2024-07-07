@@ -61,12 +61,13 @@
                 </div>
                 <div id="proEditNext">
                     <form onsubmit="return editProfile()" action="edit" method="post" encType="multipart/form-data">
+                    	<input type="hidden" id="userNick" name="userNick">
                         <input type="button" value="&lang;" id="backStep">
                         <div id="editPhoto">
                         	<div id="remove">
                                 <input type="button" value="REMOVE IMG" id="removeImg">
                                 <input type="button" value="MY IMG" id="backImg">
-                                <input type="hidden" id="imgChk">
+                                <input type="hidden" id="imgChk" name="imgChk">
                             </div>
                             <div id="editPhotoCircle">
                                 <label for="editPhotoFile" id="edtiPhotoLabel"><img id="editSelPhoto"></label>
@@ -123,6 +124,7 @@
         if($(this).find('.proSelImg').attr('src') == "./resources/img/프로필.png") {
         	$('#removeImg').css('display', 'none');
         }
+        $('#userNick').val($(this).find('.proSelNick').text());
     })
 
     //체크 확인

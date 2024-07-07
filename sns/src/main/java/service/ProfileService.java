@@ -85,4 +85,10 @@ public class ProfileService implements IF_ProfileService{
 	public List<ProfileVO> selectSub(String id) throws Exception {
 		return pDao.selectSub(id);
 	}
+
+	//서브 프로필 수정
+	@Override
+	public void edit(Map map) throws Exception {
+		pDao.edit(map);
+	}
 }

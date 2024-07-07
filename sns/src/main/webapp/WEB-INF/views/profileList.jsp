@@ -9,14 +9,22 @@
     <link rel="stylesheet" href="./resources/css/profileList.css">
     <!-- 다크 테마를 기본 값으로-->
     <link id="theme-setting" rel="stylesheet" href="./resources/css/dark_theme.css">
+    <link rel="stylesheet" href="./resources/css/profileMenu.css">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body class="theme">
     <div id="chatAll">
         <div id="chatMenu">
             <ul>
-                <li><a href="main">SNS</a></li>
-                <li>PROFILE</li>
+                <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li id="profileSub" class="proMainMenu">
+                    <a href="profileList">PROFILE</a>
+                    <ul id="profileSubDiv">
+                        <li class="proSubMenu"><a href="profileList">SHOW</a></li>
+                        <li class="proSubMenu">EDIT</li>
+                        <li class="proSubMenu">DELETE</li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div id="profileListTitle">
@@ -119,6 +127,8 @@
 </body>
 <script>
     window.onload = function() {
+    	$('#profileSub').css('color', '#ff00bf');
+    	$('.proSubMenu').eq(0).css('color', '#ff00bf');
         if($('.userProfile').length == 2) {
             $('#userPlus').css('display', 'none');
         }

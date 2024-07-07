@@ -10,6 +10,7 @@
 <link id="theme-setting" rel="stylesheet"
 	href="./resources/css/dark_theme.css">
 <link rel="stylesheet" href="./resources/css/chat.css">
+<link rel="stylesheet" href="./resources/css/profileMenu.css">
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -19,11 +20,18 @@
 		<input type="hidden" value="${nickName}" id="user" name="nickName">
 		<div id="chatAll">
 			<div id="chatMenu" class="chatItem">
-				<ul>
-					<li><a href="main">SNS</a></li>
-					<li>PROFILE</li>
-				</ul>
-			</div>
+            <ul>
+                <li class="proMainMenu"><a href="main">SNS</a></li>
+                <li id="profileSub" class="proMainMenu">
+                    <a href="profileList">PROFILE</a>
+                    <ul id="profileSubDiv">
+                        <li class="proSubMenu"><a href="profileList">SHOW</a></li>
+                        <li class="proSubMenu">EDIT</li>
+                        <li class="proSubMenu">DELETE</li>
+                    </ul>
+                </li>
+            </ul>
+        	</div>
 			<div id="chatUserTitle" class="chatItem">
 				<div id="chatUserHeader">
 					<span>MESSAGE</span>

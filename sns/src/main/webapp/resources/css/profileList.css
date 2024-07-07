@@ -21,43 +21,16 @@ body {
     border: 1px solid #00f7ff;
 }
 
-#chatMenu {
-    grid-column: 1 / 2;
-    grid-row: 1 / 4;
-    border-right: 1px solid #00f7ff;
-}
-
-#chatMenu ul{
-    margin: auto;
-    width: 90%;
-    padding-left: 0px;
-    height: 100%;
-}
-
-#chatMenu li {
-    margin-bottom: 5%;
-    margin-top: 5%;
-    list-style: none;
-    display: block;
-    color: #00f7ff;
-    font-size: 30px;
-}
-
-#chatMenu a {
-    text-decoration: none;
-    color: inherit;
-}
-
 #profileList {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 }
 
 #profileListAll {
-	width: 100%;
-	height: 100%;
 	display: flex;
     position: relative;
+    width: 100%;
+    heith: 100%;
 }
 
 #profileListTitle {

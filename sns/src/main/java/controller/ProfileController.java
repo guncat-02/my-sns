@@ -291,6 +291,6 @@ public class ProfileController {
 		map.put("profile", pVO);
 		map.put("nick", nick);
 		pServe.edit(map);
-		return "redirect:profileList";
+		return "redirect:/profileList";
 	}
 }

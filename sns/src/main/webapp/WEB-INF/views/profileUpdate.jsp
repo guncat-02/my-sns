@@ -177,6 +177,11 @@
         $('#editPhotoFile').val('')
         $('#removeImg').css('display', 'none');
         imgChk = $('#removeImg').val();
+        if(myImg == "./resources/img/프로필.png") {
+        	$('#backImg').css('display', 'none');
+    	} else {
+    		$('#backImg').css('display', 'block');
+    	}
     })
     
     //원래 이미지로
@@ -184,6 +189,12 @@
     	$('#editPhotoFile').val('');
     	img.src = myImg;
     	imgChk = $('#backImg').val();
+    	$('#backImg').css('display', 'none');
+    	if(myImg == "./resources/img/프로필.png") {
+    		$('#removeImg').css('display', 'none');
+    	} else {
+    		$('#removeImg').css('display', 'block');
+    	}
     })
     
     //닉네임 중복 체크

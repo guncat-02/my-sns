@@ -32,7 +32,9 @@ body {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     text-align: center;
-    padding-top: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #profileUpdateTitle {
@@ -40,7 +42,9 @@ body {
     grid-row: 1 / 2;
     border-bottom: 1px solid #00f7ff;
     padding-left: 2%;
-    padding-top: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #proEdit {
@@ -73,7 +77,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     cursor: pointer;
 }
@@ -113,7 +117,7 @@ body {
     color: #00f7ff;
     width: 70px;
     height: 70px;
-    top: 5%;
+    top: 10%;
     right: 1%;
     display: none;
 }
@@ -124,7 +128,8 @@ body {
 
 #nextStep {
     right: 0;
-    top: 250px;
+    top: 50%;
+    margin-top: -60px;
     font-size: 100px;
     background-color: transparent;
     color: #00f7ff;
@@ -137,7 +142,6 @@ body {
 
 #proEditNext {
     width: 50%;
-    border-bottom: 1px solid #00f7ff;
 }
 
 #proEditNext form {
@@ -164,7 +168,7 @@ body {
 }
 
 #editPhotoCircle {
-    margin-top: 70px;
+    margin-top: 20%;
     position: relative;
 }
 
@@ -193,7 +197,6 @@ body {
     flex-direction: column;
     justify-content: center;
     padding-right: 2%;
-    padding-top: 5%;
 }
 
 #editInfoMain span {
